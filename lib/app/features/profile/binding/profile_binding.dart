@@ -8,7 +8,9 @@ class ProfileBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => ProfileController(), fenix: true);
-    Get.lazyPut(() => AuthController(), fenix: true);
+    if (!Get.isRegistered<AuthController>()) {
+      Get.lazyPut(() => AuthController(), fenix: true);
+    }
     Get.lazyPut(() => ClassroomController(), fenix: true);
     Get.lazyPut(() => MemberController(), fenix: true);
   }

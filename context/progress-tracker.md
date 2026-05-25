@@ -43,6 +43,10 @@ Week 1 includes:
 - Separate dashboard route and screen removed from active routing
 - Flutter analyze passed after correction
 - Widget tests passed after correction
+- Dedicated Sign In screen added as the initial route
+- Profile app bar title removed so the screen does not show "Talkware Member Profile" at the top
+- Hamburger menu added with Profile and Sign Out actions
+- Sign Out moved out of the profile header and into the hamburger menu
 
 ## Current Goal
 
@@ -59,7 +63,7 @@ The current implementation is mock-first and evolves the existing profile screen
 - Replace mock Google identity with real OAuth once project/client configuration is ready
 - Replace mock Classroom data with Google Classroom API integration
 - Add profile UI polish after product flow is confirmed
-- Expand tests around member status, Classroom context, and signed-out state
+- Expand tests around member status, Classroom context, and drawer navigation states
 
 ## Not Started
 
@@ -79,5 +83,5 @@ The current implementation is mock-first and evolves the existing profile screen
 
 - Minimum Week 2 runtime foundation is now implemented on `feature/week2-member-app`.
 - Week 2 now evolves the original profile route directly instead of using a disconnected member dashboard.
-- The app lands on the Talkware Member Profile screen.
+- The app lands on the Sign In screen, then navigates to the evolved Profile screen.
 - The `context/` folder is living documentation and should be updated whenever architecture or workflow changes.

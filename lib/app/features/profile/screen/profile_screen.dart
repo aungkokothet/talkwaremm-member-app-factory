@@ -5,6 +5,7 @@ import 'package:profile_challenge_app/app/constant/resources/app_colors.dart';
 import 'package:profile_challenge_app/app/constant/resources/app_dimens.dart';
 import 'package:profile_challenge_app/app/constant/resources/app_images.dart';
 import 'package:profile_challenge_app/app/constant/resources/app_string.dart';
+import 'package:profile_challenge_app/app/constant/routing/app_route.dart';
 import 'package:profile_challenge_app/app/core/base/base_view.dart';
 import 'package:profile_challenge_app/app/features/auth/controller/auth_controller.dart';
 import 'package:profile_challenge_app/app/features/auth/model/mock_google_identity.dart';
@@ -26,7 +27,6 @@ class ProfileScreen extends BaseView<ProfileController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppString.profileTitle),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
@@ -34,6 +34,7 @@ class ProfileScreen extends BaseView<ProfileController> {
           ),
         ],
       ),
+      drawer: _ProfileDrawer(authController: authController),
       body: SafeArea(
         child: Obx(() {
           final identity = authController.identity.value;
@@ -46,10 +47,7 @@ class ProfileScreen extends BaseView<ProfileController> {
               if (identity == null)
                 _SignedOutCard(onSignIn: authController.signInWithMockGoogle)
               else
-                _MemberLearningHeader(
-                  identity: identity,
-                  onSignOut: authController.signOut,
-                ),
+                _MemberLearningHeader(identity: identity),
               const SizedBox(height: AppDimens.itemGap),
               SectionCard(
                 title: AppString.memberStatusTitle,
@@ -99,13 +97,9 @@ class _SignedOutCard extends StatelessWidget {
 }
 
 class _MemberLearningHeader extends StatelessWidget {
-  const _MemberLearningHeader({
-    required this.identity,
-    required this.onSignOut,
-  });
+  const _MemberLearningHeader({required this.identity});
 
   final MockGoogleIdentity identity;
-  final VoidCallback onSignOut;
 
   @override
   Widget build(BuildContext context) {
@@ -120,12 +114,17 @@ class _MemberLearningHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: AppDimens.avatarSize / 4,
-            backgroundColor: AppColors.surface,
-            child: Text(
-              identity.photoInitials,
-              style: textTheme.titleLarge?.copyWith(color: AppColors.primary),
+          Container(
+            width: AppDimens.avatarSize / 2,
+            height: AppDimens.avatarSize / 2,
+            padding: const EdgeInsets.all(10),
+            decoration: const BoxDecoration(
+              color: AppColors.surface,
+              shape: BoxShape.circle,
+            ),
+            child: SvgPicture.asset(
+              identity.photoAssetPath,
+              semanticsLabel: identity.photoInitials,
             ),
           ),
           const SizedBox(height: AppDimens.itemGap),
@@ -138,17 +137,68 @@ class _MemberLearningHeader extends StatelessWidget {
             identity.email,
             style: textTheme.bodyLarge?.copyWith(color: AppColors.surface),
           ),
-          const SizedBox(height: AppDimens.itemGap),
-          OutlinedButton.icon(
-            onPressed: onSignOut,
-            icon: const Icon(Icons.logout_outlined),
-            label: const Text(AppString.signOut),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: AppColors.surface,
-              side: const BorderSide(color: AppColors.surface),
-            ),
-          ),
         ],
+      ),
+    );
+  }
+}
+
+class _ProfileDrawer extends StatelessWidget {
+  const _ProfileDrawer({required this.authController});
+
+  final AuthController authController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: SafeArea(
+        child: Obx(() {
+          final identity = authController.identity.value;
+
+          return ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              if (identity != null)
+                DrawerHeader(
+                  margin: EdgeInsets.zero,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SvgPicture.asset(
+                        identity.photoAssetPath,
+                        width: 44,
+                        height: 44,
+                        semanticsLabel: identity.photoInitials,
+                      ),
+                      const SizedBox(height: AppDimens.itemGap),
+                      Text(
+                        identity.fullName,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const SizedBox(height: AppDimens.itemGap / 2),
+                      Text(
+                        identity.email,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                ),
+              ListTile(
+                leading: const Icon(Icons.person_outline),
+                title: const Text(AppString.profileMenuTitle),
+                onTap: () {
+                  Get.back();
+                  Get.offNamed(Routes.profileScreen);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.logout_outlined),
+                title: const Text(AppString.signOut),
+                onTap: authController.signOutAndReturnToSignIn,
+              ),
+            ],
+          );
+        }),
       ),
     );
   }

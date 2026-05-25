@@ -50,10 +50,10 @@ Important: Week 2 currently has a mock-first foundation only. Real Google Sign-I
 ## Core User Flow Today
 
 1. App launches through `GetMaterialApp`.
-2. The Profile feature opens as the initial screen.
-3. User sees the evolved Talkware Member Profile screen.
+2. The Sign In screen opens as the initial screen.
+3. Mock Google sign-in routes the user to the evolved Profile screen.
 4. The profile shows mock Google/member identity, Talkware member status, Classroom context, and future points.
-5. Mock sign-out/sign-in behavior previews the future authenticated member flow.
+5. The hamburger menu provides Profile and Sign Out actions.
 
 ## Long-Term Success Criteria
 

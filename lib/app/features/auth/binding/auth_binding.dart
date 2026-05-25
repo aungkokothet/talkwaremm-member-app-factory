@@ -4,6 +4,8 @@ import 'package:profile_challenge_app/app/features/auth/controller/auth_controll
 class AuthBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => AuthController(), fenix: true);
+    if (!Get.isRegistered<AuthController>()) {
+      Get.lazyPut(() => AuthController(), fenix: true);
+    }
   }
 }

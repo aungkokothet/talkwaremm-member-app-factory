@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
+import 'package:profile_challenge_app/app/features/auth/controller/auth_controller.dart';
 
 class InitialBinding extends Bindings {
   @override
   void dependencies() {
-    // Shared services can be registered here as the project grows.
+    Get.put(AuthController(), permanent: true);
   }
 }

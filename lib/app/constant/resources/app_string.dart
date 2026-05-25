@@ -3,13 +3,17 @@ class AppString {
 
   static const String appName = 'Talkware Member App';
   static const String profileTitle = 'Talkware Member Profile';
+  static const String profileMenuTitle = 'Profile';
   static const String mockMemberFullName = 'Maya Chen';
   static const String mockMemberEmail = 'maya.chen@example.com';
   static const String mockMemberPhotoInitials = 'MC';
+  static const String mockMemberPhotoAsset =
+      'assets/images/profile_challenge_logo.svg';
+  static const String signInTitle = 'Sign In';
   static const String signInWithGoogle = 'Mock Google Sign-In';
   static const String signOut = 'Sign out';
   static const String signedOutMessage =
-      'Sign in to preview the Talkware learning profile.';
+      'Sign in to continue to your Talkware learning profile.';
   static const String memberStatusTitle = 'Talkware Member Status';
   static const String memberStatusLabel = 'Builder Member';
   static const String memberStatusDescription =

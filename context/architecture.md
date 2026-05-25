@@ -19,8 +19,8 @@ The app evolves week by week, but the Week 1 architecture remains the foundation
 - `lib/app/constant/resources/` - colors, dimensions, strings, images, and theme
 - `lib/app/constant/routing/` - route constants and GetX page registration
 - `lib/app/core/` - shared base abstractions and app-level binding
+- `lib/app/features/auth/` - sign-in screen plus mock identity and sign-in/sign-out state
 - `lib/app/features/profile/` - Week 1 profile feature module
-- `lib/app/features/auth/` - mock identity and sign-in/sign-out state
 - `lib/app/features/member/` - member status state for the evolved profile screen
 - `lib/app/features/classroom/` - mock Classroom context state
 - `lib/app/widget/` - shared reusable widgets
@@ -44,7 +44,8 @@ Routing is handled by GetX through `GetMaterialApp`.
 
 - Route names live in `lib/app/constant/routing/app_route.dart`.
 - Pages and bindings live in `lib/app/constant/routing/app_pages.dart`.
-- The current app starts at the profile route.
+- The current app starts at the sign-in route.
+- Mock sign-in routes to the profile route.
 - `InitialBinding` is registered at app startup for shared dependencies.
 - Feature bindings register feature controllers with GetX.
 
@@ -69,7 +70,7 @@ lib/app/features/member/
 lib/app/features/classroom/
 ```
 
-Those modules integrate with the existing profile route through `ProfileBinding`. The separate dashboard approach was corrected so Week 2 evolves the existing profile screen directly.
+Those modules integrate through the sign-in and profile routes. The separate dashboard approach was corrected so Week 2 evolves the existing profile screen directly.
 
 ## Auth and Access Status
 

@@ -84,10 +84,11 @@ Week 2 screens should preserve this sense of clarity. New member, auth, or class
 
 Current Week 2 UI additions:
 
-- mock sign-in entry card
+- dedicated mock sign-in screen
 - member identity header on the profile screen
+- hamburger menu with Profile and Sign Out
 - member status section
 - classroom participation summary
 - future points placeholder card
 
-These are mock-first UI surfaces on the evolved profile screen. Real Google identity, Classroom data, and points systems are not implemented yet.
+These are mock-first UI surfaces. The app starts on Sign In, then routes to the evolved profile screen. Real Google identity, Classroom data, and points systems are not implemented yet.
