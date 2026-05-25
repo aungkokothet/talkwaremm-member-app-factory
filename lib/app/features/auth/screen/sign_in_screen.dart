@@ -12,54 +12,93 @@ class SignInScreen extends BaseView<AuthController> {
 
   @override
   Widget buildView(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(AppDimens.screenPadding),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: AppDimens.signInMaxWidth,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppDimens.signInHorizontalPadding,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: SvgPicture.asset(
-                      AppImages.logo,
-                      width: AppDimens.signInLogoSize,
-                      height: AppDimens.signInLogoSize,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxWidth: AppDimens.signInMaxWidth,
+                      ),
+                      child: Column(
+                        children: [
+                          const SizedBox(height: AppDimens.sectionGap),
+                          _SignInContent(
+                            onSignIn: controller.signInAndOpenProfile,
+                          ),
+                          const Spacer(),
+                          const _SignInFooter(),
+                        ],
+                      ),
                     ),
                   ),
-                  const SizedBox(height: AppDimens.sectionGap),
-                  Text(AppString.signInTitle, style: textTheme.headlineMedium),
-                  const SizedBox(height: AppDimens.itemGap),
-                  Text(
-                    AppString.signInSubtitle,
-                    style: textTheme.bodyLarge?.copyWith(
-                      color: AppColors.textSecondary,
-                      height: 1.4,
-                    ),
-                  ),
-                  const SizedBox(height: AppDimens.sectionGap),
-                  _GoogleSignInButton(
-                    onPressed: controller.signInAndOpenProfile,
-                  ),
-                  const SizedBox(height: AppDimens.screenPadding),
-                  Text(
-                    AppString.signInFooter,
-                    textAlign: TextAlign.center,
-                    style: textTheme.bodyMedium,
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
+    );
+  }
+}
+
+class _SignInContent extends StatelessWidget {
+  const _SignInContent({required this.onSignIn});
+
+  final VoidCallback onSignIn;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const _BrandingBlock(),
+        const SizedBox(height: AppDimens.sectionGap),
+        Text(
+          AppString.signInTitle,
+          textAlign: TextAlign.center,
+          style: textTheme.headlineMedium,
+        ),
+        const SizedBox(height: AppDimens.itemGap),
+        Text(
+          AppString.signInSubtitle,
+          textAlign: TextAlign.center,
+          style: textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
+        ),
+        const SizedBox(height: AppDimens.sectionGap),
+        _GoogleSignInButton(onPressed: onSignIn),
+      ],
+    );
+  }
+}
+
+class _BrandingBlock extends StatelessWidget {
+  const _BrandingBlock();
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return Column(
+      children: [
+        SvgPicture.asset(
+          AppImages.logo,
+          width: AppDimens.signInLogoSize,
+          height: AppDimens.signInLogoSize,
+        ),
+        const SizedBox(height: AppDimens.itemGap),
+        Text(AppString.signInBrandName, style: textTheme.titleLarge),
+      ],
     );
   }
 }
@@ -72,6 +111,7 @@ class _GoogleSignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: double.infinity,
       height: AppDimens.signInButtonHeight,
       child: OutlinedButton(
         onPressed: onPressed,
@@ -91,6 +131,7 @@ class _GoogleSignInButton extends StatelessWidget {
               height: AppDimens.signInProviderIconSize,
               alignment: Alignment.center,
               decoration: BoxDecoration(
+                color: AppColors.surface,
                 border: Border.all(color: AppColors.border),
                 shape: BoxShape.circle,
               ),
@@ -106,6 +147,34 @@ class _GoogleSignInButton extends StatelessWidget {
             const Text(AppString.signInWithGoogle),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _SignInFooter extends StatelessWidget {
+  const _SignInFooter();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppDimens.itemGap),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            child: TextButton(
+              onPressed: () {},
+              child: const FittedBox(child: Text(AppString.termsOfService)),
+            ),
+          ),
+          Flexible(
+            child: TextButton(
+              onPressed: () {},
+              child: const FittedBox(child: Text(AppString.privacyPolicy)),
+            ),
+          ),
+        ],
       ),
     );
   }
