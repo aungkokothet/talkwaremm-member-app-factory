@@ -61,8 +61,8 @@ Dimensions are defined in `lib/app/constant/resources/app_dimens.dart`.
 
 Shared widgets live in `lib/app/widget/`:
 
-- `SectionCard` - titled card container used for About, Contact, and Skills sections
-- `ProfileInfoTile` - icon, label, and value row used in the Contact section
+- `SectionCard` - titled card container used for profile, status, Classroom, and future points sections
+- `ProfileInfoTile` - Week 1 reusable icon, label, and value row retained for future reuse
 
 The app uses Flutter Material components styled through `AppTheme`.
 
@@ -85,9 +85,9 @@ Week 2 screens should preserve this sense of clarity. New member, auth, or class
 Current Week 2 UI additions:
 
 - mock sign-in entry card
-- member identity header
+- member identity header on the profile screen
 - member status section
 - classroom participation summary
 - future points placeholder card
 
-These are mock-first UI surfaces. Real Google identity, Classroom data, and points systems are not implemented yet.
+These are mock-first UI surfaces on the evolved profile screen. Real Google identity, Classroom data, and points systems are not implemented yet.

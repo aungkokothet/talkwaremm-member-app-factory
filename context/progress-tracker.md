@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Week 2 mock-first foundation implemented.
+Week 2 mock-first profile evolution implemented.
 
 ## Stable Baseline
 
@@ -32,29 +32,34 @@ Week 1 includes:
 - Week 2 runtime implementation started
 - Minimum `auth`, `member`, and `classroom` feature modules added
 - Mock Google identity model and sign-in/sign-out behavior added
-- Member dashboard route and screen added
+- Member learning profile implemented on the existing profile route
 - Talkware member status badge added
 - Classroom context card with sample course and assignment data added
 - Future Talkware Points placeholder card added
-- Widget coverage added for profile-to-dashboard navigation and mock sign-in
+- Widget coverage updated for the evolved member profile, mock sign-out, and mock sign-in
+- Separate member dashboard approach corrected
+- Existing ProfileScreen evolved into the Talkware Member learning profile
+- Mock identity, member status, Classroom context, and future points now appear on the profile screen
+- Separate dashboard route and screen removed from active routing
+- Flutter analyze passed after correction
+- Widget tests passed after correction
 
 ## Current Goal
 
 Continue Week 2 from the implementation branch while preserving Week 1 as the frozen learning milestone.
 
-The current implementation is mock-first. It does not include real Google OAuth, real Classroom API calls, secrets, or credentials.
+The current implementation is mock-first and evolves the existing profile screen directly. It does not include real Google OAuth, real Classroom API calls, secrets, or credentials.
 
 ## In Progress
 
-- Week 2 member app foundation review
+- Ready for review before merge
 
 ## Next Up
 
-- Decide whether the profile screen remains the default entry or the member dashboard becomes the default entry
 - Replace mock Google identity with real OAuth once project/client configuration is ready
 - Replace mock Classroom data with Google Classroom API integration
-- Add member dashboard polish after product flow is confirmed
-- Expand tests around sign-out and direct dashboard routing
+- Add profile UI polish after product flow is confirmed
+- Expand tests around member status, Classroom context, and signed-out state
 
 ## Not Started
 
@@ -67,11 +72,12 @@ The current implementation is mock-first. It does not include real Google OAuth,
 
 - Exact Week 2 implementation order for auth, member profile, and Classroom context
 - Google project/client configuration details
-- Whether Week 2 should keep the profile screen as the default initial route or evolve it into the member dashboard
 - Whether mock auth state should persist locally before real OAuth is introduced
+- Whether mock profile initials are sufficient until a real Google profile photo URL is available
 
 ## Session Notes
 
 - Minimum Week 2 runtime foundation is now implemented on `feature/week2-member-app`.
-- Week 1 profile functionality remains available as the initial route.
+- Week 2 now evolves the original profile route directly instead of using a disconnected member dashboard.
+- The app lands on the Talkware Member Profile screen.
 - The `context/` folder is living documentation and should be updated whenever architecture or workflow changes.

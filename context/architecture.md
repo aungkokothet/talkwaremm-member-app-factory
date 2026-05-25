@@ -21,7 +21,7 @@ The app evolves week by week, but the Week 1 architecture remains the foundation
 - `lib/app/core/` - shared base abstractions and app-level binding
 - `lib/app/features/profile/` - Week 1 profile feature module
 - `lib/app/features/auth/` - mock identity and sign-in/sign-out state
-- `lib/app/features/member/` - member dashboard, member status, and Week 2 binding
+- `lib/app/features/member/` - member status state for the evolved profile screen
 - `lib/app/features/classroom/` - mock Classroom context state
 - `lib/app/widget/` - shared reusable widgets
 - `assets/images/` - static image and SVG assets
@@ -50,7 +50,7 @@ Routing is handled by GetX through `GetMaterialApp`.
 
 ## State Model
 
-Week 1 uses `ProfileController` with a reactive `Rx<ProfileInfo>`.
+Week 1 used `ProfileController` with a reactive `Rx<ProfileInfo>`. Week 2 keeps `ProfileController` and `BaseView`, but the profile screen now composes mock identity, member status, and Classroom state from feature controllers.
 
 The same style should guide future features:
 
@@ -61,7 +61,7 @@ The same style should guide future features:
 
 ## Week 2 Evolution Boundary
 
-Week 2 may add new feature modules such as:
+Week 2 has added these mock-first feature modules:
 
 ```txt
 lib/app/features/auth/
@@ -69,7 +69,7 @@ lib/app/features/member/
 lib/app/features/classroom/
 ```
 
-Those modules should integrate with the existing architecture. They should not collapse into the profile feature or bypass the base controller/view patterns.
+Those modules integrate with the existing profile route through `ProfileBinding`. The separate dashboard approach was corrected so Week 2 evolves the existing profile screen directly.
 
 ## Auth and Access Status
 

@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 import 'package:profile_challenge_app/app/constant/routing/app_route.dart';
-import 'package:profile_challenge_app/app/features/member/binding/member_binding.dart';
-import 'package:profile_challenge_app/app/features/member/screen/member_dashboard_screen.dart';
 import 'package:profile_challenge_app/app/features/profile/binding/profile_binding.dart';
 import 'package:profile_challenge_app/app/features/profile/screen/profile_screen.dart';
 
@@ -15,11 +13,6 @@ class AppPages {
       name: Routes.profileScreen,
       page: () => const ProfileScreen(),
       binding: ProfileBinding(),
-    ),
-    GetPage(
-      name: Routes.memberDashboard,
-      page: () => const MemberDashboardScreen(),
-      binding: MemberBinding(),
     ),
   ];
 }

@@ -51,9 +51,9 @@ Important: Week 2 currently has a mock-first foundation only. Real Google Sign-I
 
 1. App launches through `GetMaterialApp`.
 2. The Profile feature opens as the initial screen.
-3. User sees profile header, About, Contact, and Skills sections.
-4. User can navigate to the Week 2 member dashboard.
-5. The member dashboard previews mock sign-in, member status, classroom context, and future points.
+3. User sees the evolved Talkware Member Profile screen.
+4. The profile shows mock Google/member identity, Talkware member status, Classroom context, and future points.
+5. Mock sign-out/sign-in behavior previews the future authenticated member flow.
 
 ## Long-Term Success Criteria
 

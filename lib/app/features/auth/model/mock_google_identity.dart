@@ -1,11 +1,11 @@
 class MockGoogleIdentity {
   const MockGoogleIdentity({
-    required this.displayName,
+    required this.fullName,
     required this.email,
     required this.photoInitials,
   });
 
-  final String displayName;
+  final String fullName;
   final String email;
   final String photoInitials;
 }
