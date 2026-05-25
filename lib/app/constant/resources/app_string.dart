@@ -9,7 +9,7 @@ class AppString {
   static const String mockMemberPhotoInitials = 'MC';
   static const String mockMemberPhotoAsset =
       'assets/images/profile_challenge_logo.svg';
-  static const String signInBrandName = 'Journey';
+  static const String signInBrandName = 'Talkware Journey';
   static const String signInTitle = 'Log In';
   static const String signInSubtitle = 'Please log in to continue.';
   static const String signInWithGoogle = 'Sign in with Google';

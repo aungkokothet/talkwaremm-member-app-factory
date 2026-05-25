@@ -100,7 +100,7 @@ Act as an expert Flutter developer. Build a clean, production-ready, and respons
 The screen must be strictly minimalist, featuring ONLY a single "Sign in with Google" button as the authentication method.
 
 ### Layout & Structure (Vertical Stack)
-1. App Logo / Branding: A placeholder area at the top containing a centered asset Image or Icon (e.g., Icons.explore), an App Name Text widget ("Journey"), and a small gap.
+1. App Logo / Branding: A placeholder area at the top containing a centered asset Image or Icon (e.g., Icons.explore), an App Name Text widget ("Talkware Journey"), and a small gap.
 2. Header Text: An alignment-centered Text widget reading "Log In" using Theme.of(context).textTheme.headlineMedium, followed by a subtle subtitle: "Please log in to continue."
 3. Primary Action: A single, centered "Sign in with Google" button. It must follow official Google Identity branding guidelines:
    - Elevated or Outlined Button with a white/light-gray background.
