@@ -9,8 +9,12 @@ class AppString {
   static const String mockMemberPhotoInitials = 'MC';
   static const String mockMemberPhotoAsset =
       'assets/images/profile_challenge_logo.svg';
-  static const String signInTitle = 'Sign In';
-  static const String signInWithGoogle = 'Mock Google Sign-In';
+  static const String signInTitle = 'Welcome back';
+  static const String signInSubtitle =
+      'Use your Google account to continue your Talkware learning journey.';
+  static const String signInWithGoogle = 'Continue with Google';
+  static const String signInFooter =
+      'Talkware uses your Google identity to connect learning participation.';
   static const String signOut = 'Sign out';
   static const String signedOutMessage =
       'Sign in to continue to your Talkware learning profile.';
