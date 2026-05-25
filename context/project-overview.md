@@ -45,14 +45,15 @@ Week 2 reframes the app as a Talkware Member App. The app is expected to evolve 
 - Google Classroom-connected learning context
 - future participation economy foundations
 
-Important: Google Sign-In and Classroom integration are product direction for Week 2, not implemented yet in this documentation-only synchronization.
+Important: Week 2 currently has a mock-first foundation only. Real Google Sign-In and Classroom API integration are not implemented yet.
 
 ## Core User Flow Today
 
 1. App launches through `GetMaterialApp`.
 2. The Profile feature opens as the initial screen.
 3. User sees profile header, About, Contact, and Skills sections.
-4. Profile data is reactive through GetX.
+4. User can navigate to the Week 2 member dashboard.
+5. The member dashboard previews mock sign-in, member status, classroom context, and future points.
 
 ## Long-Term Success Criteria
 

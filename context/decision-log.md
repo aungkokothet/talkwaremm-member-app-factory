@@ -253,3 +253,26 @@ Instead, the project should accumulate:
 - reusable systems,
 - and participation-driven functionality
 over time.
+
+---
+
+# 2026-05-25 - Mock-First Week 2 Foundation Added
+
+## Decision
+
+Week 2 begins with a mock-first foundation before real Google OAuth or Classroom API integration.
+
+## Reason
+
+The repository needs an operational member-app shape without requiring secrets, credentials, or external API setup during the first implementation step.
+
+## Result
+
+The app now includes:
+- `auth` feature module with mock Google identity state
+- `member` feature module with member dashboard and status
+- `classroom` feature module with sample course and assignment context
+- route navigation from the Week 1 profile screen to the Week 2 dashboard
+- a future Talkware Points placeholder
+
+Real Google Sign-In and Classroom integration remain future work.

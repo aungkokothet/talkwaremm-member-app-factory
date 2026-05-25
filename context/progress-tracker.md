@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Week 2 ready for implementation branch. Runtime implementation has not started yet.
+Week 2 mock-first foundation implemented.
 
 ## Stable Baseline
 
@@ -29,41 +29,49 @@ Week 1 includes:
 - Week 1 frozen baseline preparation completed
 - Documentation and workflow alignment completed
 - Branch/tag workflow defined for students and contributors
+- Week 2 runtime implementation started
+- Minimum `auth`, `member`, and `classroom` feature modules added
+- Mock Google identity model and sign-in/sign-out behavior added
+- Member dashboard route and screen added
+- Talkware member status badge added
+- Classroom context card with sample course and assignment data added
+- Future Talkware Points placeholder card added
+- Widget coverage added for profile-to-dashboard navigation and mock sign-in
 
 ## Current Goal
 
-Begin Week 2 from a feature branch while preserving Week 1 as the frozen learning milestone.
+Continue Week 2 from the implementation branch while preserving Week 1 as the frozen learning milestone.
 
-This documentation update synchronizes the product direction, architecture notes, UI context, repository references, and AI workflow. It does not implement Google Sign-In, Classroom integration, or runtime code changes.
+The current implementation is mock-first. It does not include real Google OAuth, real Classroom API calls, secrets, or credentials.
 
 ## In Progress
 
-- Nothing in runtime implementation
+- Week 2 member app foundation review
 
 ## Next Up
 
-- Create or switch to the Week 2 implementation branch
-- Design the member app feature boundaries
-- Plan auth/member/classroom modules before coding
-- Keep Week 1 available through its milestone tag
+- Decide whether the profile screen remains the default entry or the member dashboard becomes the default entry
+- Replace mock Google identity with real OAuth once project/client configuration is ready
+- Replace mock Classroom data with Google Classroom API integration
+- Add member dashboard polish after product flow is confirmed
+- Expand tests around sign-out and direct dashboard routing
 
 ## Not Started
 
-- Google Sign-In implementation
-- authenticated member state
-- Google Classroom integration
-- member dashboard UI
+- Real Google Sign-In implementation
+- Real authenticated member persistence
+- Real Google Classroom integration
 - participation economy features
-- Week 2 Flutter runtime behavior changes
 
 ## Open Questions
 
 - Exact Week 2 implementation order for auth, member profile, and Classroom context
 - Google project/client configuration details
-- Whether Week 2 should keep the profile screen as a fallback or evolve it into a member dashboard
+- Whether Week 2 should keep the profile screen as the default initial route or evolve it into the member dashboard
+- Whether mock auth state should persist locally before real OAuth is introduced
 
 ## Session Notes
 
-- Documentation and workflow synchronization only.
-- Runtime Flutter code remains unchanged.
+- Minimum Week 2 runtime foundation is now implemented on `feature/week2-member-app`.
+- Week 1 profile functionality remains available as the initial route.
 - The `context/` folder is living documentation and should be updated whenever architecture or workflow changes.

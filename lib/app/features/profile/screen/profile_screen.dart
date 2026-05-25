@@ -5,6 +5,7 @@ import 'package:profile_challenge_app/app/constant/resources/app_colors.dart';
 import 'package:profile_challenge_app/app/constant/resources/app_dimens.dart';
 import 'package:profile_challenge_app/app/constant/resources/app_images.dart';
 import 'package:profile_challenge_app/app/constant/resources/app_string.dart';
+import 'package:profile_challenge_app/app/constant/routing/app_route.dart';
 import 'package:profile_challenge_app/app/core/base/base_view.dart';
 import 'package:profile_challenge_app/app/features/profile/controller/profile_controller.dart';
 import 'package:profile_challenge_app/app/widget/profile_info_tile.dart';
@@ -19,6 +20,11 @@ class ProfileScreen extends BaseView<ProfileController> {
       appBar: AppBar(
         title: const Text(AppString.profileTitle),
         actions: [
+          IconButton(
+            tooltip: AppString.memberDashboardAction,
+            onPressed: () => Get.toNamed(Routes.memberDashboard),
+            icon: const Icon(Icons.dashboard_outlined),
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: SvgPicture.asset(AppImages.logo, width: 36, height: 36),
@@ -34,10 +40,7 @@ class ProfileScreen extends BaseView<ProfileController> {
             children: [
               _ProfileHeader(profile: profile),
               const SizedBox(height: 20),
-              SectionCard(
-                title: 'About',
-                child: Text(profile.about),
-              ),
+              SectionCard(title: 'About', child: Text(profile.about)),
               const SizedBox(height: AppDimens.itemGap),
               SectionCard(
                 title: 'Contact',
@@ -70,11 +73,15 @@ class ProfileScreen extends BaseView<ProfileController> {
                   spacing: 8,
                   runSpacing: 8,
                   children: profile.skills
-                      .map((skill) => Chip(
-                            label: Text(skill),
-                            backgroundColor: AppColors.accent.withValues(alpha: 0.24),
-                            side: BorderSide.none,
-                          ))
+                      .map(
+                        (skill) => Chip(
+                          label: Text(skill),
+                          backgroundColor: AppColors.accent.withValues(
+                            alpha: 0.24,
+                          ),
+                          side: BorderSide.none,
+                        ),
+                      )
                       .toList(),
                 ),
               ),
@@ -115,7 +122,9 @@ class _ProfileHeader extends StatelessWidget {
             ),
             child: Text(
               _initials(profile.name),
-              style: textTheme.headlineMedium?.copyWith(color: AppColors.primary),
+              style: textTheme.headlineMedium?.copyWith(
+                color: AppColors.primary,
+              ),
             ),
           ),
           const SizedBox(height: 18),
@@ -139,6 +148,10 @@ class _ProfileHeader extends StatelessWidget {
       return '?';
     }
 
-    return parts.take(2).map((part) => part.characters.first).join().toUpperCase();
+    return parts
+        .take(2)
+        .map((part) => part.characters.first)
+        .join()
+        .toUpperCase();
   }
 }

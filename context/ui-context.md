@@ -82,12 +82,12 @@ Week 2 screens should preserve this sense of clarity. New member, auth, or class
 
 ## Week 2 UI Evolution
 
-Potential Week 2 UI additions:
+Current Week 2 UI additions:
 
-- sign-in entry screen
+- mock sign-in entry card
 - member identity header
 - member status section
 - classroom participation summary
-- dashboard-style sections
+- future points placeholder card
 
-These are planned directions only. They are not implemented in the current runtime code.
+These are mock-first UI surfaces. Real Google identity, Classroom data, and points systems are not implemented yet.

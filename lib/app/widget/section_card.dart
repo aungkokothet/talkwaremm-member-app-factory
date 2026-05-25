@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:profile_challenge_app/app/constant/resources/app_dimens.dart';
 
 class SectionCard extends StatelessWidget {
-  const SectionCard({
-    super.key,
-    required this.title,
-    required this.child,
-  });
+  const SectionCard({super.key, required this.title, required this.child});
 
   final String title;
   final Widget child;

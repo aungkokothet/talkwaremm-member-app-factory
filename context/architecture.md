@@ -20,6 +20,9 @@ The app evolves week by week, but the Week 1 architecture remains the foundation
 - `lib/app/constant/routing/` - route constants and GetX page registration
 - `lib/app/core/` - shared base abstractions and app-level binding
 - `lib/app/features/profile/` - Week 1 profile feature module
+- `lib/app/features/auth/` - mock identity and sign-in/sign-out state
+- `lib/app/features/member/` - member dashboard, member status, and Week 2 binding
+- `lib/app/features/classroom/` - mock Classroom context state
 - `lib/app/widget/` - shared reusable widgets
 - `assets/images/` - static image and SVG assets
 - `test/` - widget and unit tests
@@ -70,6 +73,6 @@ Those modules should integrate with the existing architecture. They should not c
 
 ## Auth and Access Status
 
-Current runtime code has no authentication and no backend/API integration.
+Current runtime code has mock authentication only. It does not include real OAuth, secrets, credentials, backend calls, or Google Classroom API calls.
 
-Google Sign-In is a planned Week 2 direction, not yet implemented. Any future implementation must happen on a feature branch and keep Week 1 stable.
+Google Sign-In remains a planned Week 2 integration. Any real implementation must happen on a feature branch and keep Week 1 stable.

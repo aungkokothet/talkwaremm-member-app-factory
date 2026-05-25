@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Week 2 - Talkware Member App planning and implementation preparation.
+Week 2 - Talkware Member App mock-first implementation foundation.
 
 ## Current Goal
 
@@ -18,7 +18,7 @@ The app is expected to evolve toward:
 
 This is no longer just a static profile customization exercise. The app is becoming a real operational member surface for Talkware participants.
 
-Important: Week 2 runtime implementation has not started yet.
+Important: Week 2 runtime implementation has started with a mock-first foundation. Real Google OAuth and Classroom API integration are not implemented yet.
 
 ## Previous Stable Baseline
 
@@ -86,15 +86,24 @@ The following systems and patterns must remain intact unless explicitly changed.
 - centralized styling
 - responsive ListView-based screen structure
 
-## Planned For Week 2
+## Week 2 Foundation
 
-### Planned Features
+### Implemented Mock Foundation
 
-- Google authentication
-- authenticated member state
-- Google Classroom integration
-- Talkware member status layer
-- operational member dashboard thinking
+- mock Google identity model
+- mock sign-in and sign-out controller behavior
+- member dashboard route and screen
+- Talkware member status badge
+- Classroom context card with sample course and assignment data
+- future Talkware Points placeholder card
+
+### Remaining Planned Features
+
+- real Google authentication
+- real authenticated member state and persistence
+- real Google Classroom integration
+- production member status source
+- operational member dashboard polish
 
 ### Planned Feature Modules
 
@@ -106,4 +115,4 @@ lib/app/features/member/
 lib/app/features/classroom/
 ```
 
-These modules are not implemented yet. They should be added on `feature/week2-member-app` when implementation begins.
+These modules now exist in mock-first form on `feature/week2-member-app`. They should remain local-only until real Google configuration is ready.
