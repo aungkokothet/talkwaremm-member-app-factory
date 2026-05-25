@@ -1,59 +1,65 @@
-# Profile Challenge App
+# Project Overview
 
-## Overview
+## Product Direction
 
-A Flutter mobile/web application built as a Week 1 training challenge. It displays a personal developer profile with name, role, contact info, skills, and an about section. The app is designed as a starting point for students to practice Flutter UI development, theming, and state management using GetX.
+This repository is the Talkware Member App Factory: an evolving Flutter training application that grows week by week like real operational software.
 
-## Goals
+Week 1 remains the stable Builder Profile App baseline. Week 2 is the current evolution toward a Talkware Member App. The repository should preserve earlier working milestones while teaching students how to extend architecture safely.
 
-1. Demonstrate a clean, structured Flutter project using GetX for state management and routing
-2. Provide a customizable profile UI that students can redesign with their own color theme and personal brand
-3. Establish a scalable folder structure and base classes that can grow with the project
+## Software-Factory Purpose
 
-## Core User Flow
+The project teaches:
 
-1. App launches and navigates directly to the Profile screen
-2. User sees a profile header with avatar initials, name, and role
-3. User scrolls through About, Contact, and Skills sections
-4. Profile data is reactive via GetX — updates to the controller reflect immediately in the UI
+- Flutter application structure
+- GetX state management, routing, and dependency injection
+- reusable architecture patterns
+- centralized UI resources
+- AI-assisted development workflows
+- Git-based product evolution with branches and tags
 
-## Features
+The repository should not become isolated weekly tutorial apps. Each week should build on the same operational codebase.
 
-### Profile Display
+## Week 1: Stable Baseline
 
-- Avatar with initials derived from the profile name
-- Name, role, and location display
-- About section with a short bio
-- Contact section with email, phone, and location tiles
-- Skills section with chip tags
+Week 1 established a Builder Profile App. It displays local profile information with a clean mobile UI and reactive GetX state.
 
-### Architecture & DX
+Week 1 includes:
 
-- GetX-based routing, state management, and dependency injection
-- Base controller and base view abstractions for consistent screen structure
-- Centralized constants for colors, dimensions, strings, images, and theme
-- SVG logo support via `flutter_svg`
+- Flutter + GetX app scaffold
+- `BaseController` and `BaseView`
+- centralized `AppColors`, `AppDimens`, `AppString`, `AppImages`, and `AppTheme`
+- GetX routing through route constants and page registration
+- feature-based `profile` module
+- reusable shared widgets
+- widget smoke test coverage
 
-## Scope
+Week 1 is preserved as the starting point for new students and as the stable architectural baseline.
 
-### In Scope
+## Week 2: Current Evolution
 
-- Static profile display with reactive state via GetX
-- Light theme only
-- Single screen (Profile screen)
-- SVG asset support
+Week 2 reframes the app as a Talkware Member App. The app is expected to evolve toward:
 
-### Out of Scope
+- real member identity
+- member profile display
+- member or builder status
+- Google Classroom-connected learning context
+- future participation economy foundations
 
-- Authentication or user login
-- Backend/API integration
-- Profile editing UI (data is hardcoded in the controller)
-- Dark mode
-- Multiple screens or navigation flows
+Important: Google Sign-In and Classroom integration are product direction for Week 2, not implemented yet in this documentation-only synchronization.
 
-## Success Criteria
+## Core User Flow Today
 
-1. App launches and displays the Profile screen with Maya Chen's data
-2. All sections (About, Contact, Skills) render correctly
-3. Avatar initials are correctly derived from the profile name
-4. Widget test passes confirming the profile screen renders key content
+1. App launches through `GetMaterialApp`.
+2. The Profile feature opens as the initial screen.
+3. User sees profile header, About, Contact, and Skills sections.
+4. Profile data is reactive through GetX.
+
+## Long-Term Success Criteria
+
+The project succeeds when students can:
+
+- start from a known weekly milestone
+- understand the current architecture quickly
+- create a feature branch for active development
+- extend the app without rewriting the baseline
+- keep documentation synchronized with implementation

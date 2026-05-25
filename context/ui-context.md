@@ -1,77 +1,93 @@
 # UI Context
 
+## UI Direction
+
+The current UI is the Week 1 Builder Profile App baseline. It should remain clean, professional, beginner-readable, and easy to evolve.
+
+Week 2 may evolve the experience toward a Talkware Member App, but the UI system should continue to use the same centralized resources, theme, and reusable section-based layout patterns.
+
 ## Theme
 
-Light mode only. The design language is a clean, professional mobile profile card — light backgrounds, teal primary color, warm accent, and subtle borders. No dark mode.
+Light mode only for the current baseline.
+
+The Week 1 visual language uses:
+
+- light backgrounds
+- teal primary color
+- warm accent color
+- subtle borders
+- card-based information sections
+
+No dark mode is currently implemented.
 
 ## Colors
 
-All colors are defined in `lib/app/constant/resources/app_colors.dart` and applied via `AppTheme`. Never use hardcoded hex values in widgets.
+All colors are defined in `lib/app/constant/resources/app_colors.dart` and applied through `AppTheme`. Do not hardcode hex values in widgets.
 
-| Role             | Constant                  | Value       |
-| ---------------- | ------------------------- | ----------- |
-| Primary          | `AppColors.primary`       | `#1F7A8C`   |
-| Secondary        | `AppColors.secondary`     | `#F25F5C`   |
-| Accent           | `AppColors.accent`        | `#FFC857`   |
-| Page background  | `AppColors.background`    | `#F7F9FB`   |
-| Surface (cards)  | `AppColors.surface`       | `#FFFFFF`   |
-| Primary text     | `AppColors.textPrimary`   | `#102A43`   |
-| Muted/label text | `AppColors.textSecondary` | `#627D98`   |
-| Border           | `AppColors.border`        | `#D9E2EC`   |
+| Role | Constant | Value |
+| --- | --- | --- |
+| Primary | `AppColors.primary` | `#1F7A8C` |
+| Secondary | `AppColors.secondary` | `#F25F5C` |
+| Accent | `AppColors.accent` | `#FFC857` |
+| Page background | `AppColors.background` | `#F7F9FB` |
+| Surface | `AppColors.surface` | `#FFFFFF` |
+| Primary text | `AppColors.textPrimary` | `#102A43` |
+| Muted text | `AppColors.textSecondary` | `#627D98` |
+| Border | `AppColors.border` | `#D9E2EC` |
 
 ## Typography
 
-Defined in `AppTheme.lightTheme` via `ThemeData.textTheme`. Always use `Theme.of(context).textTheme` — do not define inline `TextStyle`.
+Typography is defined in `AppTheme.lightTheme` through `ThemeData.textTheme`. Use `Theme.of(context).textTheme` in widgets.
 
-| Role            | Style key        | Size | Weight |
-| --------------- | ---------------- | ---- | ------ |
-| Name / headline | `headlineMedium` | 28   | w800   |
-| Section title   | `titleMedium`    | 16   | w700   |
-| Body text       | `bodyLarge`      | 16   | w400   |
-| Label / muted   | `bodyMedium`     | 14   | w400   |
-
-## Border Radius
-
-Defined in `AppDimens` and `AppTheme`.
-
-| Context         | Value                    |
-| --------------- | ------------------------ |
-| Cards           | `AppDimens.cardRadius` (8px) |
-| Avatar circle   | `AppDimens.avatarSize / 2` (54px) |
-| Info tile icon  | 8px (inline)             |
+| Role | Style key | Size | Weight |
+| --- | --- | --- | --- |
+| Name / headline | `headlineMedium` | 28 | w800 |
+| Section title | `titleMedium` | 16 | w700 |
+| Body text | `bodyLarge` | 16 | w400 |
+| Label / muted | `bodyMedium` | 14 | w400 |
 
 ## Dimensions
 
-Defined in `lib/app/constant/resources/app_dimens.dart`.
+Dimensions are defined in `lib/app/constant/resources/app_dimens.dart`.
 
-| Constant                | Value  | Usage                          |
-| ----------------------- | ------ | ------------------------------ |
-| `AppDimens.screenPadding` | 20px | ListView outer padding         |
-| `AppDimens.cardRadius`    | 8px  | Card and container border radius |
-| `AppDimens.avatarSize`    | 108px | Avatar circle diameter         |
-| `AppDimens.itemGap`       | 12px | Vertical gap between sections  |
+| Constant | Value | Usage |
+| --- | --- | --- |
+| `AppDimens.screenPadding` | 20px | ListView outer padding |
+| `AppDimens.cardRadius` | 8px | Card and container border radius |
+| `AppDimens.avatarSize` | 108px | Avatar circle diameter |
+| `AppDimens.itemGap` | 12px | Vertical gap between sections |
 
-## Component Library
+## Current Components
 
-No third-party component library. Uses Flutter's built-in Material 3 components (`Card`, `Chip`, `AppBar`, `Scaffold`, `ListView`) styled via `AppTheme`.
+Shared widgets live in `lib/app/widget/`:
 
-Custom shared widgets live in `lib/app/widget/`:
-- `SectionCard` — titled card container used for About, Contact, and Skills sections
-- `ProfileInfoTile` — icon + label + value row used in the Contact section
+- `SectionCard` - titled card container used for About, Contact, and Skills sections
+- `ProfileInfoTile` - icon, label, and value row used in the Contact section
+
+The app uses Flutter Material components styled through `AppTheme`.
 
 ## Layout Patterns
 
-- Single-screen app with a `Scaffold` + `AppBar` + `SafeArea` + `ListView`
-- Profile header is a full-width colored container with avatar initials, name, and role
-- Sections (About, Contact, Skills) are `SectionCard` widgets stacked vertically in the list
-- Contact items use `ProfileInfoTile` with a colored icon box, label, and value
-- Skills use `Wrap` with `Chip` widgets
+Current layout:
 
-## Icons
+- `Scaffold`
+- `AppBar`
+- `SafeArea`
+- `ListView`
+- profile header
+- stacked reusable sections
+- `Wrap` for skill chips
 
-Material Icons (built-in Flutter). Used in `ProfileInfoTile`:
-- `Icons.email_outlined` — email
-- `Icons.phone_outlined` — phone
-- `Icons.place_outlined` — location
+Week 2 screens should preserve this sense of clarity. New member, auth, or classroom UI should use centralized resources and reusable widgets instead of inline styling.
 
-AppBar logo: SVG asset via `flutter_svg`, rendered at 36×36px.
+## Week 2 UI Evolution
+
+Potential Week 2 UI additions:
+
+- sign-in entry screen
+- member identity header
+- member status section
+- classroom participation summary
+- dashboard-style sections
+
+These are planned directions only. They are not implemented in the current runtime code.
