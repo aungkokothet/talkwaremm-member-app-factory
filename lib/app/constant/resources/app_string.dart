@@ -4,15 +4,17 @@ class AppString {
   static const String appName = 'Talkware Member App';
   static const String profileTitle = 'Talkware Member Profile';
   static const String profileMenuTitle = 'Profile';
-  static const String mockMemberFullName = 'Maya Chen';
-  static const String mockMemberEmail = 'maya.chen@example.com';
-  static const String mockMemberPhotoInitials = 'MC';
-  static const String mockMemberPhotoAsset =
-      'assets/images/profile_challenge_logo.svg';
   static const String signInBrandName = 'Talkware Journey';
   static const String signInTitle = 'Log In';
   static const String signInSubtitle = 'Please log in to continue.';
   static const String signInWithGoogle = 'Sign in with Google';
+  static const String signInErrorTitle = 'Sign-in failed';
+  static const String signInErrorMessage =
+      'Please check Google Sign-In setup and try again.';
+  static const String googleSignInErrorPrefix = 'Google error: ';
+  static const String googleSignInUnsupportedMessage =
+      'This platform requires the Google-rendered sign-in button. Try Android/iOS for now, or configure the web Google Sign-In flow.';
+  static const String signInCanceledMessage = 'Sign-in was canceled.';
   static const String termsOfService = 'Terms of Service';
   static const String privacyPolicy = 'Privacy Policy';
   static const String signOut = 'Sign out';

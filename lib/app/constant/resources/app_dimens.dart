@@ -11,4 +11,6 @@ class AppDimens {
   static const double signInLogoSize = 64;
   static const double signInButtonHeight = 54;
   static const double signInProviderIconSize = 24;
+  static const double profileHeaderAvatarSize = 54;
+  static const double drawerAvatarSize = 44;
 }

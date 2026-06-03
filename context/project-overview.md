@@ -35,6 +35,8 @@ Week 1 includes:
 
 Week 1 is preserved as the starting point for new students and as the stable architectural baseline.
 
+New students should clone `main` for the stable starter app. Weekly app evolution lives in persistent weekly feature branches instead of automatically replacing `main`.
+
 ## Week 2: Current Evolution
 
 Week 2 reframes the app as a Talkware Member App. The app is expected to evolve toward:
@@ -45,15 +47,27 @@ Week 2 reframes the app as a Talkware Member App. The app is expected to evolve 
 - Google Classroom-connected learning context
 - future participation economy foundations
 
-Important: Week 2 currently has a mock-first foundation only. Real Google Sign-In and Classroom API integration are not implemented yet.
+Important: Week 2 now has Android Google Sign-In working through the official `google_sign_in` package. Web browser sign-in and iOS sign-in are not configured. Classroom API integration is not implemented yet.
 
 ## Core User Flow Today
 
 1. App launches through `GetMaterialApp`.
 2. The Sign In screen opens as the initial screen.
-3. Mock Google sign-in routes the user to the evolved Profile screen.
-4. The profile shows mock Google/member identity, Talkware member status, Classroom context, and future points.
-5. The hamburger menu provides Profile and Sign Out actions.
+3. Google Sign-In authenticates the user and stores an in-memory app identity.
+4. The Profile screen composes auth, member, and Classroom controller state.
+5. The profile shows real Google name/email/photo when available, mock Talkware member status, mock Classroom context, and future points.
+6. The hamburger drawer provides Profile and Sign Out actions.
+
+## Runtime Reality Today
+
+- The official `google_sign_in` package is installed.
+- Android Google Sign-In is implemented in `GoogleAuthService`.
+- Google identity is held in memory only and is not persisted locally.
+- The Android OAuth client is registered by package name and SHA-1.
+- The Web OAuth client ID is used as Android's `serverClientId`.
+- No Google Classroom API client is installed.
+- No backend, credentials, secrets, or persistent session storage are implemented.
+- Mock member and Classroom data comes from `AppString` constants through simple GetX controllers.
 
 ## Long-Term Success Criteria
 
@@ -64,3 +78,12 @@ The project succeeds when students can:
 - create a feature branch for active development
 - extend the app without rewriting the baseline
 - keep documentation synchronized with implementation
+
+## Branch Strategy
+
+- `main` = stable course starter / Week 1 baseline
+- `feature/week2-member-app` = Week 2 Talkware Member App evolution
+- `feature/week3-loyalty-structure` = future Week 3 evolution
+- tags = frozen learning checkpoints such as `v0.1-week1-first-challenge`
+
+Weekly feature branches are course learning tracks, not throwaway branches. `main` should not automatically absorb weekly work unless the course owner explicitly changes the branch strategy.

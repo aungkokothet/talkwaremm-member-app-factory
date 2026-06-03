@@ -2,15 +2,15 @@
 
 ## UI Direction
 
-The current UI is the Week 1 Builder Profile App baseline. It should remain clean, professional, beginner-readable, and easy to evolve.
+The current UI is the Week 2 mock-first Talkware Member App evolution of the Week 1 Builder Profile App baseline. It remains clean, professional, beginner-readable, and easy to evolve.
 
-Week 2 may evolve the experience toward a Talkware Member App, but the UI system should continue to use the same centralized resources, theme, and reusable section-based layout patterns.
+Week 2 uses the same centralized resources, theme, and reusable section-based layout patterns from Week 1.
 
 ## Theme
 
 Light mode only for the current baseline.
 
-The Week 1 visual language uses:
+The visual language uses:
 
 - light backgrounds
 - teal primary color
@@ -42,6 +42,7 @@ Typography is defined in `AppTheme.lightTheme` through `ThemeData.textTheme`. Us
 | Role | Style key | Size | Weight |
 | --- | --- | --- | --- |
 | Name / headline | `headlineMedium` | 28 | w800 |
+| Large title | `titleLarge` | 20 | w700 |
 | Section title | `titleMedium` | 16 | w700 |
 | Body text | `bodyLarge` | 16 | w400 |
 | Label / muted | `bodyMedium` | 14 | w400 |
@@ -52,10 +53,18 @@ Dimensions are defined in `lib/app/constant/resources/app_dimens.dart`.
 
 | Constant | Value | Usage |
 | --- | --- | --- |
-| `AppDimens.screenPadding` | 20px | ListView outer padding |
+| `AppDimens.screenPadding` | 20px | Main profile padding and member header padding |
 | `AppDimens.cardRadius` | 8px | Card and container border radius |
-| `AppDimens.avatarSize` | 108px | Avatar circle diameter |
+| `AppDimens.avatarSize` | 108px | Original avatar size reference; current header uses half size |
 | `AppDimens.itemGap` | 12px | Vertical gap between sections |
+| `AppDimens.sectionGap` | 32px | Larger vertical section spacing |
+| `AppDimens.signInMaxWidth` | 400px | Sign-in content max width |
+| `AppDimens.signInHorizontalPadding` | 24px | Sign-in horizontal padding |
+| `AppDimens.signInLogoSize` | 64px | Sign-in logo size |
+| `AppDimens.signInButtonHeight` | 54px | Sign-in button height |
+| `AppDimens.signInProviderIconSize` | 24px | Sign-in provider icon size |
+| `AppDimens.profileHeaderAvatarSize` | 54px | Profile header Google avatar size |
+| `AppDimens.drawerAvatarSize` | 44px | Drawer Google avatar size |
 
 ## Current Components
 
@@ -68,15 +77,25 @@ The app uses Flutter Material components styled through `AppTheme`.
 
 ## Layout Patterns
 
-Current layout:
+Current profile layout:
 
 - `Scaffold`
 - `AppBar`
+- `Drawer`
 - `SafeArea`
 - `ListView`
-- profile header
+- mock member identity header
 - stacked reusable sections
-- `Wrap` for skill chips
+- drawer navigation with Profile and Sign Out actions
+
+Current sign-in layout:
+
+- `Scaffold`
+- `SafeArea`
+- `LayoutBuilder`
+- `SingleChildScrollView`
+- max-width constrained centered content
+- footer row with Terms of Service and Privacy Policy actions
 
 Week 2 screens should preserve this sense of clarity. New member, auth, or classroom UI should use centralized resources and reusable widgets instead of inline styling.
 
@@ -84,34 +103,24 @@ Week 2 screens should preserve this sense of clarity. New member, auth, or class
 
 Current Week 2 UI additions:
 
-- dedicated mock sign-in screen
-- member identity header on the profile screen
-- hamburger menu with Profile and Sign Out
+- dedicated sign-in screen
+- real Google identity header on the profile screen
+- hamburger drawer with Profile and Sign Out
 - member status section
 - classroom participation summary
 - future points placeholder card
 
-These are mock-first UI surfaces. The app starts on Sign In, then routes to the evolved profile screen. Real Google identity, Classroom data, and points systems are not implemented yet.
+The app starts on Sign In, then routes to the evolved profile screen after Google Sign-In succeeds. Classroom data, member status, and points systems remain mock-first.
 
-### Sign In Screen Spec:
+### Sign In Screen Reality
 
-Act as an expert Flutter developer. Build a clean, production-ready, and responsive Login Screen widget based on the following specifications.
+`SignInScreen` extends `BaseView<AuthController>` and uses:
 
-The screen must be strictly minimalist, featuring ONLY a single "Sign in with Google" button as the authentication method.
+- SVG app logo from `AppImages.logo`
+- app name `Talkware Journey`
+- title `Log In`
+- subtitle `Please log in to continue.`
+- one full-width outlined `Sign in with Google` action
+- footer `TextButton`s for Terms of Service and Privacy Policy
 
-### Layout & Structure (Vertical Stack)
-1. App Logo / Branding: A placeholder area at the top containing a centered asset Image or Icon (e.g., Icons.explore), an App Name Text widget ("Talkware Journey"), and a small gap.
-2. Header Text: An alignment-centered Text widget reading "Log In" using Theme.of(context).textTheme.headlineMedium, followed by a subtle subtitle: "Please log in to continue."
-3. Primary Action: A single, centered "Sign in with Google" button. It must follow official Google Identity branding guidelines:
-   - Elevated or Outlined Button with a white/light-gray background.
-   - Standard Google 'G' logo icon on the left (use a placeholder icon or asset image slot).
-   - Text reading "Sign in with Google" or "Continue with Google" on the right.
-4. Footer: Small, muted text links at the very bottom for "Terms of Service" and "Privacy Policy" using a Row of TextButtons.
-
-### Technical & UX Constraints
-
-- Responsiveness: Wrap the layout in a LayoutBuilder and SingleChildScrollView to ensure it never overflows on small screens. Maximize card width to 400dp on web/desktop viewports, and make it full-width with 24dp horizontal padding on mobile.
-- Safe Area: Wrap everything in a SafeArea widget to respect notches and system bars.
-- Architecture: Keep the code modular, stateless (unless handling basic local loading states), and use clean Material 3 design practices. Use standard spacing with SizedBox.
-
-Please output the complete, clean Flutter widget code ready to drop into a file named 'sign_in_screen.dart'.
+The current Google icon is a simple circular `G` placeholder, not an official Google asset.

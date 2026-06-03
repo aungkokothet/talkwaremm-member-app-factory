@@ -8,7 +8,7 @@ import 'package:profile_challenge_app/app/constant/resources/app_string.dart';
 import 'package:profile_challenge_app/app/constant/routing/app_route.dart';
 import 'package:profile_challenge_app/app/core/base/base_view.dart';
 import 'package:profile_challenge_app/app/features/auth/controller/auth_controller.dart';
-import 'package:profile_challenge_app/app/features/auth/model/mock_google_identity.dart';
+import 'package:profile_challenge_app/app/features/auth/model/app_identity.dart';
 import 'package:profile_challenge_app/app/features/classroom/controller/classroom_controller.dart';
 import 'package:profile_challenge_app/app/features/classroom/model/classroom_context.dart';
 import 'package:profile_challenge_app/app/features/member/controller/member_controller.dart';
@@ -45,7 +45,7 @@ class ProfileScreen extends BaseView<ProfileController> {
             padding: const EdgeInsets.all(AppDimens.screenPadding),
             children: [
               if (identity == null)
-                _SignedOutCard(onSignIn: authController.signInWithMockGoogle)
+                _SignedOutCard(onSignIn: authController.signInAndOpenProfile)
               else
                 _MemberLearningHeader(identity: identity),
               const SizedBox(height: AppDimens.itemGap),
@@ -99,7 +99,7 @@ class _SignedOutCard extends StatelessWidget {
 class _MemberLearningHeader extends StatelessWidget {
   const _MemberLearningHeader({required this.identity});
 
-  final MockGoogleIdentity identity;
+  final AppIdentity identity;
 
   @override
   Widget build(BuildContext context) {
@@ -114,18 +114,9 @@ class _MemberLearningHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: AppDimens.avatarSize / 2,
-            height: AppDimens.avatarSize / 2,
-            padding: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(
-              color: AppColors.surface,
-              shape: BoxShape.circle,
-            ),
-            child: SvgPicture.asset(
-              identity.photoAssetPath,
-              semanticsLabel: identity.photoInitials,
-            ),
+          _IdentityAvatar(
+            identity: identity,
+            size: AppDimens.profileHeaderAvatarSize,
           ),
           const SizedBox(height: AppDimens.itemGap),
           Text(
@@ -164,11 +155,9 @@ class _ProfileDrawer extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SvgPicture.asset(
-                        identity.photoAssetPath,
-                        width: 44,
-                        height: 44,
-                        semanticsLabel: identity.photoInitials,
+                      _IdentityAvatar(
+                        identity: identity,
+                        size: AppDimens.drawerAvatarSize,
                       ),
                       const SizedBox(height: AppDimens.itemGap),
                       Text(
@@ -200,6 +189,51 @@ class _ProfileDrawer extends StatelessWidget {
           );
         }),
       ),
+    );
+  }
+}
+
+class _IdentityAvatar extends StatelessWidget {
+  const _IdentityAvatar({required this.identity, required this.size});
+
+  final AppIdentity identity;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    final photoUrl = identity.photoUrl;
+
+    return Container(
+      width: size,
+      height: size,
+      decoration: const BoxDecoration(
+        color: AppColors.surface,
+        shape: BoxShape.circle,
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: photoUrl == null || photoUrl.isEmpty
+          ? Center(
+              child: Text(
+                identity.initials,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(color: AppColors.primary),
+              ),
+            )
+          : Image.network(
+              photoUrl,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Center(
+                  child: Text(
+                    identity.initials,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleMedium?.copyWith(color: AppColors.primary),
+                  ),
+                );
+              },
+            ),
     );
   }
 }

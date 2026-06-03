@@ -3,14 +3,15 @@
 This file records important architectural, workflow, and product-direction decisions made throughout the evolution of the project.
 
 The purpose is to preserve continuity between:
-- project phases,
-- architecture evolution,
-- AI-assisted implementation sessions,
-- and future contributors.
+
+- project phases
+- architecture evolution
+- AI-assisted implementation sessions
+- future contributors
 
 ---
 
-# 2026-05-25 — Adopted Context-Driven AI Workflow
+# 2026-05-25 - Adopted Context-Driven AI Workflow
 
 ## Decision
 
@@ -21,16 +22,18 @@ The project adopts a context-driven AI collaboration workflow using standardized
 The repository is expected to evolve continuously across multiple training weeks and product phases.
 
 AI agents require:
-- continuity,
-- architectural awareness,
-- implementation history,
-- and current project direction.
+
+- continuity
+- architectural awareness
+- implementation history
+- current project direction
 
 The context system provides structured operational memory for AI-assisted development.
 
 ## Result
 
 The repository now maintains:
+
 - `project-overview.md`
 - `architecture.md`
 - `code-standards.md`
@@ -43,7 +46,7 @@ The repository now maintains:
 
 ---
 
-# 2026-05-25 — Week 1 Architecture Preserved
+# 2026-05-25 - Week 1 Architecture Preserved
 
 ## Decision
 
@@ -52,17 +55,19 @@ The Week 1 Flutter + GetX architecture will remain the long-term foundation of t
 ## Reason
 
 Week 1 established:
-- reusable architecture,
-- centralized resources,
-- feature-based modules,
-- reactive state management,
-- and beginner-readable structure.
+
+- reusable architecture
+- centralized resources
+- feature-based modules
+- reactive state management
+- beginner-readable structure
 
 The goal of the software factory is incremental evolution, not repeated rewrites.
 
 ## Result
 
 The following systems are treated as foundational:
+
 - GetX routing
 - BaseController / BaseView
 - centralized AppColors/AppDimens/AppTheme
@@ -73,7 +78,7 @@ Future weeks should extend this foundation rather than replace it.
 
 ---
 
-# 2026-05-25 — Week 2 Positioned as Operational Member App
+# 2026-05-25 - Week 2 Positioned as Operational Member App
 
 ## Decision
 
@@ -82,30 +87,29 @@ Week 2 is defined as a Talkware Member App instead of a generic Flutter tutorial
 ## Reason
 
 The project philosophy emphasizes:
-- operational software,
-- real users,
-- participation systems,
-- and ecosystem thinking.
+
+- operational software
+- real users
+- participation systems
+- ecosystem thinking
 
 The app should become the first real operational member activation surface for Talkware participants.
 
 ## Result
 
-Week 2 introduces:
+Week 2 introduces the product direction for:
+
 - Google Sign-In
 - real member identity
 - Google Classroom integration
 - member participation context
 - future participation economy preparation
 
-The app evolves from:
-- static local profile app
-into:
-- authenticated operational member system.
+The app evolves from a static local profile app into an authenticated operational member system over time.
 
 ---
 
-# 2026-05-25 — Google Identity Chosen as Member Identity Layer
+# 2026-05-25 - Google Identity Chosen as Member Identity Layer
 
 ## Decision
 
@@ -114,22 +118,26 @@ Google Sign-In becomes the primary identity system for Week 2.
 ## Reason
 
 Google identity:
-- simplifies onboarding,
-- provides real authenticated user identity,
-- integrates naturally with Google Classroom,
-- and reduces custom account-management complexity during early phases.
+
+- simplifies onboarding
+- provides real authenticated user identity
+- integrates naturally with Google Classroom
+- reduces custom account-management complexity during early phases
 
 ## Result
 
-The project introduces:
+The project direction includes:
+
 - Google authentication flow
 - authenticated member session state
 - Google profile rendering
 - Classroom-connected learning context
 
+The current runtime now uses the official `google_sign_in` package for the sign-in boundary. Platform OAuth setup may still be required before sign-in succeeds on target devices.
+
 ---
 
-# 2026-05-25 — Classroom Integration Prioritized Before Wallet Systems
+# 2026-05-25 - Classroom Integration Prioritized Before Wallet Systems
 
 ## Decision
 
@@ -137,25 +145,24 @@ Google Classroom integration is prioritized before implementing Talkware Points 
 
 ## Reason
 
-The immediate goal of Week 2 is:
-- operational learning participation,
-- not financial or loyalty mechanics.
+The immediate goal of Week 2 is operational learning participation, not financial or loyalty mechanics.
 
 The app should first become a real educational participation surface before introducing economy layers.
 
 ## Result
 
 Week 2 focuses on:
-- course visibility,
-- assignment visibility,
-- learning participation context,
-- and member activation.
+
+- course visibility
+- assignment visibility
+- learning participation context
+- member activation
 
 Wallets and participation economy systems remain future-phase concerns.
 
 ---
 
-# 2026-05-25 — Git Workflow Standardized
+# 2026-05-25 - Git Workflow Standardized
 
 ## Decision
 
@@ -164,24 +171,28 @@ The repository adopts a real software-factory Git workflow.
 ## Reason
 
 The project should teach:
-- incremental software evolution,
-- release continuity,
-- feature isolation,
-- and operational development workflows.
+
+- incremental software evolution
+- release continuity
+- feature isolation
+- operational development workflows
 
 ## Result
 
 Git conventions:
-- `main` = latest stable operational version
-- feature branches = active development work
+
+- `main` = stable course starter / Week 1 baseline
+- weekly feature branches = persistent course learning tracks
 - tags = weekly milestone preservation
+- weekly work should not automatically merge into `main` unless the course owner explicitly changes the branch strategy
 
 Example tag:
+
 - `v0.1-week1-first-challenge`
 
 ---
 
-# 2026-05-25 — AGENTS.md Adopted as AI Entry Point
+# 2026-05-25 - AGENTS.md Adopted as AI Entry Point
 
 ## Decision
 
@@ -190,69 +201,55 @@ Example tag:
 ## Reason
 
 AI coding agents require:
-- predictable operating instructions,
-- reading order,
-- continuity rules,
-- and architecture-preservation guidance.
+
+- predictable operating instructions
+- reading order
+- continuity rules
+- architecture-preservation guidance
 
 ## Result
 
 AI agents should:
-1. read `AGENTS.md`,
-2. follow context reading order,
-3. preserve architecture continuity,
-4. and update context files when structural changes occur.
+
+1. read `AGENTS.md`
+2. follow context reading order
+3. preserve architecture continuity
+4. update context files when structural changes occur
 
 ---
 
-# 2026-05-25 — Context Separation Strategy Adopted
+# 2026-05-25 - Context Separation Strategy Adopted
 
 ## Decision
 
 The repository separates:
-- current operational truth,
-- historical reasoning,
-- implementation progress,
-- and architecture documentation.
+
+- current operational truth
+- historical reasoning
+- implementation progress
+- architecture documentation
 
 ## Reason
 
 Mixing all project information into a single evolving document creates:
-- drift,
-- confusion,
-- duplication,
-- and poor AI continuity.
+
+- drift
+- confusion
+- duplication
+- poor AI continuity
 
 ## Result
 
 Responsibilities are separated:
 
 | File | Responsibility |
-|---|---|
+| --- | --- |
 | `current-state.md` | current operational direction |
 | `decision-log.md` | historical reasoning |
 | `progress-tracker.md` | implementation status |
 | `architecture.md` | system structure |
 | `project-overview.md` | product meaning |
 | `AGENTS.md` | AI operating instructions |
-
----
-
-# Core Long-Term Principle
-
-The project should evolve like a real operational software system.
-
-The repository is not intended to become:
-- disconnected weekly demos,
-- isolated tutorial exercises,
-- or repeatedly rewritten apps.
-
-Instead, the project should accumulate:
-- architecture,
-- operational meaning,
-- reusable systems,
-- and participation-driven functionality
-over time.
 
 ---
 
@@ -269,10 +266,145 @@ The repository needs an operational member-app shape without requiring secrets, 
 ## Result
 
 The app now includes:
-- `auth` feature module with mock Google identity state
-- `member` feature module with member dashboard and status
+
+- `auth` feature module, originally added with mock Google identity state
+- `member` feature module with mock member status
 - `classroom` feature module with sample course and assignment context
-- route navigation from the Week 1 profile screen to the Week 2 dashboard
+- dedicated sign-in route as the initial route
+- sign-in navigation to the evolved profile screen
 - a future Talkware Points placeholder
 
-Real Google Sign-In and Classroom integration remain future work.
+Real Google Sign-In has since been selected as the first real Week 2 integration. Classroom integration remains future work.
+
+---
+
+# 2026-05-26 - Week 2 Profile Route Chosen Over Separate Dashboard
+
+## Decision
+
+The Week 2 member experience evolves the existing profile route instead of using a separate member dashboard route.
+
+## Reason
+
+The project continuity rule says Week 2 should build on the Week 1 app instead of creating a disconnected tutorial-style surface.
+
+## Result
+
+The active runtime flow is:
+
+- `Routes.signIn` opens `SignInScreen`.
+- sign-in sets `AuthController.identity`.
+- the app navigates to `Routes.profileScreen`.
+- `ProfileScreen` composes auth identity, mock member status, mock Classroom context, and future points sections.
+- the drawer provides Profile and Sign Out actions.
+
+There is no active member dashboard route or screen in the current code.
+
+---
+
+# 2026-06-01 - Real Google Sign-In Selected as First Week 2 Real Integration
+
+## Decision
+
+Real Google Sign-In is the first production-style Week 2 integration.
+
+## Reason
+
+The app needs a real member identity boundary before Classroom participation or future economy systems can be meaningful. Direct `google_sign_in` keeps the implementation focused and avoids adding Firebase Auth or backend complexity before the training system needs it.
+
+## Result
+
+The app now includes:
+
+- official `google_sign_in` dependency
+- isolated Google Sign-In config holder
+- `AppIdentity` model populated from `GoogleSignInAccount`
+- `AuthService` abstraction
+- `GoogleAuthService` implementation
+- real Google sign-in/sign-out calls from `AuthController`
+- real Google name, email, and profile photo rendering where available
+- fallback initials avatar when no profile photo is available
+- setup notes in `docs/setup/google-sign-in.md`
+
+The app still does not include:
+
+- Google Classroom API integration
+- Talkware Points wallet behavior
+- backend authentication
+- committed secrets
+- persistent authenticated session storage
+
+---
+
+# 2026-06-01 - Android OAuth Client Kept Out of Dart Server Client Config
+
+## Decision
+
+The Android OAuth client ID is treated as Google Cloud registration data, not as a Dart `serverClientId`.
+
+## Reason
+
+Android Google Sign-In validates the app through package name and SHA fingerprint registration. The `google_sign_in_android` package documents that if the app is not using `google-services.json`, Android requires the Web OAuth client ID as `serverClientId`. The Android OAuth client ID must not be used as a fake server client ID.
+
+## Result
+
+The Android client created for `com.example.profile_challenge_app` remains documented in setup notes. This was later completed with a Web OAuth client used as Android's `serverClientId`. Classroom, member status, and Talkware Points remain mock-first.
+
+---
+
+# 2026-06-01 - Web OAuth Client Wired as Android serverClientId
+
+## Decision
+
+The Web OAuth client ID from the Talkware Journey Google Cloud project is wired as the default Android `serverClientId`.
+
+## Reason
+
+The Android OAuth client validates package name and SHA-1 in Google Cloud, but `google_sign_in_android` requires a Web OAuth client ID as `serverClientId` when the app is not using `google-services.json`.
+
+## Result
+
+The app uses:
+
+- Android OAuth client for package/SHA registration
+- Web OAuth client ID as `serverClientId`
+- no Web client secret in Flutter
+
+Classroom, member status, and Talkware Points remain mock-first.
+
+---
+
+# 2026-06-01 - Android Google Sign-In Confirmed Working
+
+## Decision
+
+The Week 2 Google Sign-In boundary is stabilized for Android.
+
+## Reason
+
+The Android OAuth client is registered by package name and SHA-1 in Google Cloud, and the Web OAuth client ID is used as `serverClientId` as required by `google_sign_in_android` when not using `google-services.json`.
+
+## Result
+
+Android Google Sign-In works. The confusing default config name was clarified from Android server client wording to Web server client wording. No client secret is stored in Flutter. Classroom, member status, and Talkware Points remain mock-first.
+
+---
+
+# Core Long-Term Principle
+
+The project should evolve like a real operational software system.
+
+The repository is not intended to become:
+
+- disconnected weekly demos
+- isolated tutorial exercises
+- repeatedly rewritten apps
+
+Instead, the project should accumulate:
+
+- architecture
+- operational meaning
+- reusable systems
+- participation-driven functionality
+
+over time.

@@ -1,9 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get/get.dart';
 import 'package:profile_challenge_app/app/constant/resources/app_string.dart';
+import 'package:profile_challenge_app/app/features/auth/model/app_identity.dart';
+import 'package:profile_challenge_app/app/features/auth/service/auth_service.dart';
 import 'package:profile_challenge_app/main_app.dart';
 
+class FakeAuthService implements AuthService {
+  static const identity = AppIdentity(
+    fullName: 'Maya Chen',
+    email: 'maya.chen@example.com',
+  );
+
+  @override
+  Future<AppIdentity?> signIn() async => identity;
+
+  @override
+  Future<void> signOut() async {}
+}
+
 void main() {
+  setUp(() {
+    Get.testMode = true;
+    Get.put<AuthService>(FakeAuthService(), permanent: true);
+  });
+
+  tearDown(Get.reset);
+
   testWidgets('starts on sign in and opens the member profile', (tester) async {
     await tester.pumpWidget(const MyApp());
 
@@ -14,8 +37,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text(AppString.profileTitle), findsNothing);
-    expect(find.text(AppString.mockMemberFullName), findsOneWidget);
-    expect(find.text(AppString.mockMemberEmail), findsOneWidget);
+    expect(find.text(FakeAuthService.identity.fullName), findsOneWidget);
+    expect(find.text(FakeAuthService.identity.email), findsOneWidget);
     expect(find.text(AppString.memberStatusTitle), findsOneWidget);
     expect(find.text(AppString.classroomTitle), findsOneWidget);
 

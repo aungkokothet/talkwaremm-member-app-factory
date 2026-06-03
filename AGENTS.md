@@ -37,8 +37,7 @@ Talkware Member App evolution.
 
 Focus:
 
-- member identity planning
-- Google Sign-In planning
+- Android Google Sign-In as the first real Week 2 integration
 - Google Classroom integration planning
 - Talkware member activation
 - operational app thinking
@@ -46,7 +45,7 @@ Focus:
 
 Week 2 evolves the Week 1 architecture. Do not rewrite the app from scratch.
 
-Important: Week 2 runtime implementation has not started yet. Do not implement Google Sign-In, Classroom integration, or other runtime behavior unless explicitly requested.
+Important: Week 2 runtime implementation has started. Real Google Sign-In works on Android through `google_sign_in`. Google Classroom integration, client secrets, backend calls, and persistent authenticated state are not implemented yet unless explicitly requested.
 
 ## Context Files
 
@@ -119,15 +118,22 @@ When adding new functionality:
 
 ### Main Branch
 
-`main` represents the latest stable operational version of the app.
+`main` represents the stable course starter app and Week 1 baseline for new students.
 
-### Feature Branches
+New students should clone the repository and start on `main` unless their course instructions say otherwise.
 
-Use feature branches for active development work.
+### Weekly Feature Branches
+
+Weekly feature branches are persistent learning tracks, not throwaway branches.
 
 Example:
 
 - `feature/week2-member-app`
+- `feature/week3-loyalty-structure`
+
+Week 2 participants should check out `feature/week2-member-app`.
+
+Do not automatically merge weekly evolution work into `main`. `main` should absorb weekly work only if the course owner explicitly changes the branch strategy.
 
 ### Tags
 
@@ -148,6 +154,8 @@ https://github.com/aungkokothet/talkwaremm-member-app-factory.git
 ## Continuity Rules
 
 Week 2 builds on Week 1. Future weeks should evolve the existing system instead of replacing it.
+
+Weekly evolution should happen on weekly feature branches while `main` remains the stable starter baseline.
 
 The project should maintain continuity between:
 

@@ -8,24 +8,26 @@ The app evolves week by week, but the Week 1 architecture remains the foundation
 
 | Layer | Technology | Role |
 | --- | --- | --- |
-| Framework | Flutter (Dart SDK ^3.9) | Cross-platform UI framework |
+| Framework | Flutter (Dart SDK ^3.9.2) | Cross-platform UI framework |
 | State Management | GetX ^4.7.2 | Reactive state, dependency injection, routing |
+| Authentication | google_sign_in ^7.2.0 | Direct Google account sign-in |
 | SVG Rendering | flutter_svg ^2.0.17 | Renders SVG assets |
 | Icons | Material Icons | Built-in Flutter UI icons |
 
 ## Current System Boundaries
 
-- `lib/app/constant/` - app-wide constants for resources and routing
+- `lib/app/constant/` - app-wide constants for config, resources, and routing
+- `lib/app/constant/config/` - isolated Google Sign-In configuration values read from dart defines
 - `lib/app/constant/resources/` - colors, dimensions, strings, images, and theme
 - `lib/app/constant/routing/` - route constants and GetX page registration
 - `lib/app/core/` - shared base abstractions and app-level binding
-- `lib/app/features/auth/` - sign-in screen plus mock identity and sign-in/sign-out state
-- `lib/app/features/profile/` - Week 1 profile feature module
-- `lib/app/features/member/` - member status state for the evolved profile screen
+- `lib/app/features/auth/` - sign-in screen, app identity model, auth service boundary, and sign-in/sign-out state
+- `lib/app/features/profile/` - evolved profile screen and lightweight profile controller
+- `lib/app/features/member/` - mock member status state for the evolved profile screen
 - `lib/app/features/classroom/` - mock Classroom context state
 - `lib/app/widget/` - shared reusable widgets
 - `assets/images/` - static image and SVG assets
-- `test/` - widget and unit tests
+- `test/` - widget tests
 
 ## Preserved Foundation
 
@@ -44,14 +46,21 @@ Routing is handled by GetX through `GetMaterialApp`.
 
 - Route names live in `lib/app/constant/routing/app_route.dart`.
 - Pages and bindings live in `lib/app/constant/routing/app_pages.dart`.
-- The current app starts at the sign-in route.
-- Mock sign-in routes to the profile route.
+- The current app starts at `Routes.signIn`.
+- Google sign-in sets `AuthController.identity` and routes to `Routes.profileScreen`.
+- Sign out clears `AuthController.identity` and routes back to `Routes.signIn`.
 - `InitialBinding` is registered at app startup for shared dependencies.
 - Feature bindings register feature controllers with GetX.
+- Active routes are `Routes.signIn` and `Routes.profileScreen`.
+- There is no active member dashboard route.
 
 ## State Model
 
-Week 1 used `ProfileController` with a reactive `Rx<ProfileInfo>`. Week 2 keeps `ProfileController` and `BaseView`, but the profile screen now composes mock identity, member status, and Classroom state from feature controllers.
+The current Week 2 code keeps `ProfileController` as a lightweight `BaseController` with no profile model. The profile screen composes Google identity, mock member status, and mock Classroom state from feature controllers:
+
+- `AuthController.identity` is `Rxn<AppIdentity>`.
+- `MemberController.status` is `Rx<MemberStatus>`.
+- `ClassroomController.context` is `Rx<ClassroomContext>`.
 
 The same style should guide future features:
 
@@ -72,8 +81,10 @@ lib/app/features/classroom/
 
 Those modules integrate through the sign-in and profile routes. The separate dashboard approach was corrected so Week 2 evolves the existing profile screen directly.
 
+`ClassroomBinding` and `MemberBinding` exist as feature bindings, but the active profile route registers `ClassroomController` and `MemberController` through `ProfileBinding`.
+
 ## Auth and Access Status
 
-Current runtime code has mock authentication only. It does not include real OAuth, secrets, credentials, backend calls, or Google Classroom API calls.
+Current runtime code uses direct Google Sign-In through `google_sign_in`, and Android sign-in is confirmed working. It does not include Firebase Auth, backend calls, client secrets, persistent sessions, or Google Classroom API calls.
 
-Google Sign-In remains a planned Week 2 integration. Any real implementation must happen on a feature branch and keep Week 1 stable.
+The Android OAuth client ID is registered in Google Cloud with package name and SHA-1, and is not used as Dart `serverClientId`. Android uses the Web OAuth client ID as the default `serverClientId`, with `GOOGLE_SERVER_CLIENT_ID` still available as an override. Setup notes live in `docs/setup/google-sign-in.md`.

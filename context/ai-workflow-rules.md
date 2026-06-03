@@ -28,7 +28,7 @@ Use `current-state.md` as the current project direction and `decision-log.md` as
 - Preserve `BaseController` and `BaseView`.
 - Preserve centralized resources.
 - Preserve feature-based structure.
-- Do not hardcode routes, colors, dimensions, strings, or asset paths.
+- Do not hardcode routes, colors, dimensions, strings, or asset paths in new work.
 - Prefer small, focused changes.
 - Do not rewrite working systems unless explicitly instructed.
 - Keep implementation beginner-readable.
@@ -37,22 +37,34 @@ Use `current-state.md` as the current project direction and `decision-log.md` as
 
 Week 1 is the stable baseline. It should remain accessible through its frozen tag.
 
-Week 2 is the current evolution. It should be developed on feature branches and merged only when stable.
+`main` remains the stable course starter app and Week 1 baseline for new students.
+
+Week 2 is the current evolution and lives on `feature/week2-member-app`.
+
+Future weekly branches, such as `feature/week3-loyalty-structure`, are persistent learning tracks, not throwaway branches.
 
 Future weeks should extend the same app rather than creating unrelated projects.
 
 ## Git Workflow
 
-- `main` represents the latest stable operational version.
+- `main` represents the stable course starter / Week 1 baseline.
+- `feature/week2-member-app` represents the Week 2 Talkware Member App evolution.
+- `feature/week3-loyalty-structure` is the planned Week 3 evolution branch.
 - tags preserve frozen weekly milestones.
-- feature branches hold active development.
+- weekly feature branches hold course evolution tracks.
+- `main` should not automatically absorb weekly work unless the course owner explicitly changes the branch strategy.
 
-Common branch pattern:
+New student starter:
 
 ```bash
 git checkout main
 git pull
-git checkout -b feature/week2-member-app
+```
+
+Week 2 participant:
+
+```bash
+git checkout feature/week2-member-app
 ```
 
 Do not commit unrelated runtime changes during documentation-only tasks.
@@ -72,6 +84,6 @@ For documentation-only synchronization, do not modify runtime code.
 
 ## Week 2 Implementation Guardrail
 
-Google Sign-In, authenticated member state, and Google Classroom integration are planned Week 2 directions. They are not part of this documentation synchronization unless the user explicitly requests implementation work.
+Google Sign-In is now implemented through the official `google_sign_in` package and works on Android. Do not describe Google Classroom, member status, Talkware Points, wallet behavior, backend auth, client secrets, or persistent auth as real yet.
 
-When implementation begins, add new feature modules instead of overloading the existing profile module.
+The current Week 2 code already has `auth`, `member`, and `classroom` feature modules. Future implementation should extend those modules and keep the existing profile route composition unless a product decision explicitly changes the flow.

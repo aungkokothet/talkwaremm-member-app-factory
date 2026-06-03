@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:profile_challenge_app/app/constant/resources/app_colors.dart';
 import 'package:profile_challenge_app/app/constant/resources/app_dimens.dart';
 import 'package:profile_challenge_app/app/constant/resources/app_images.dart';
@@ -77,6 +78,22 @@ class _SignInContent extends StatelessWidget {
         ),
         const SizedBox(height: AppDimens.sectionGap),
         _GoogleSignInButton(onPressed: onSignIn),
+        Obx(() {
+          final message = Get.find<AuthController>().message.value;
+
+          if (message.isEmpty) {
+            return const SizedBox.shrink();
+          }
+
+          return Padding(
+            padding: const EdgeInsets.only(top: AppDimens.itemGap),
+            child: Text(
+              message,
+              textAlign: TextAlign.center,
+              style: textTheme.bodyMedium?.copyWith(color: AppColors.secondary),
+            ),
+          );
+        }),
       ],
     );
   }

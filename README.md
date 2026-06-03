@@ -12,7 +12,7 @@ The goal is to learn how real software grows:
 - document decisions as the system changes
 - use AI assistance with clear context and workflow rules
 
-Week 1 established the stable Builder Profile App baseline. Week 2 is the current evolution toward a Talkware Member App, but authentication and Google Sign-In are not implemented yet.
+Week 1 established the stable Builder Profile App baseline. Week 2 is the current evolution toward a Talkware Member App. Real Google Sign-In now works on Android as the first Week 2 integration, while member status, Classroom context, and points remain mock-first.
 
 ## Week-by-Week Evolution
 
@@ -30,17 +30,17 @@ Students should use Week 1 to understand and customize a working app safely.
 
 ### Week 2: Current Evolution
 
-Week 2 evolves the same codebase toward an operational Talkware Member App. The direction includes member identity, member status, and future Google Classroom context, but implementation should happen on feature branches only.
+Week 2 evolves the same codebase toward an operational Talkware Member App. The current branch includes Android Google Sign-In through the official `google_sign_in` package, mock member status, and mock Classroom context. Real Classroom API work should happen only when configuration is ready.
 
 Do not rewrite the Week 1 app. Extend it.
 
 ## Git Workflow
 
-- `main` = latest stable operational version
+- `main` = stable course starter / Week 1 baseline for new students
 - tags = frozen learning milestones
-- feature branches = active development work
+- weekly feature branches = persistent course learning tracks
 
-Use tags when teaching or revisiting a completed week. Use feature branches for new implementation work. Merge back to `main` only when the app is stable.
+Use tags when teaching or revisiting a completed week. Weekly feature branches are not throwaway branches; they hold each week of app evolution. `main` should not automatically absorb weekly work unless the course owner explicitly changes the branch strategy.
 
 ## Common Commands
 
@@ -63,10 +63,16 @@ git checkout main
 git pull
 ```
 
-Create a Week 2 feature branch:
+Start Week 2:
 
 ```bash
-git checkout -b feature/week2-member-app
+git checkout feature/week2-member-app
+```
+
+Future Week 3 track:
+
+```bash
+git checkout feature/week3-loyalty-structure
 ```
 
 ## Architecture Baseline
