@@ -11,6 +11,7 @@ The app evolves week by week, but the Week 1 architecture remains the foundation
 | Framework | Flutter (Dart SDK ^3.9.2) | Cross-platform UI framework |
 | State Management | GetX ^4.7.2 | Reactive state, dependency injection, routing |
 | Authentication | google_sign_in ^7.2.0 | Direct Google account sign-in |
+| Google Classroom API | OAuth bearer token over HTTPS | Fixed Talkware course lookup |
 | SVG Rendering | flutter_svg ^2.0.17 | Renders SVG assets |
 | Icons | Material Icons | Built-in Flutter UI icons |
 
@@ -24,7 +25,7 @@ The app evolves week by week, but the Week 1 architecture remains the foundation
 - `lib/app/features/auth/` - sign-in screen, app identity model, auth service boundary, and sign-in/sign-out state
 - `lib/app/features/profile/` - evolved profile screen and lightweight profile controller
 - `lib/app/features/member/` - mock member status state for the evolved profile screen
-- `lib/app/features/classroom/` - mock Classroom context state
+- `lib/app/features/classroom/` - fixed Talkware Classroom course API state and service
 - `lib/app/widget/` - shared reusable widgets
 - `assets/images/` - static image and SVG assets
 - `test/` - widget tests
@@ -56,11 +57,11 @@ Routing is handled by GetX through `GetMaterialApp`.
 
 ## State Model
 
-The current Week 2 code keeps `ProfileController` as a lightweight `BaseController` with no profile model. The profile screen composes Google identity, mock member status, and mock Classroom state from feature controllers:
+The current Week 2 code keeps `ProfileController` as a lightweight `BaseController` with no profile model. The profile screen composes Google identity, mock member status, and fixed Talkware Classroom state from feature controllers:
 
 - `AuthController.identity` is `Rxn<AppIdentity>`.
 - `MemberController.status` is `Rx<MemberStatus>`.
-- `ClassroomController.context` is `Rx<ClassroomContext>`.
+- `ClassroomController.context` is `Rxn<ClassroomContext>`.
 
 The same style should guide future features:
 
@@ -71,7 +72,7 @@ The same style should guide future features:
 
 ## Week 2 Evolution Boundary
 
-Week 2 has added these mock-first feature modules:
+Week 2 has added these feature modules:
 
 ```txt
 lib/app/features/auth/
@@ -85,6 +86,14 @@ Those modules integrate through the sign-in and profile routes. The separate das
 
 ## Auth and Access Status
 
-Current runtime code uses direct Google Sign-In through `google_sign_in`, and Android sign-in is confirmed working. It does not include Firebase Auth, backend calls, client secrets, persistent sessions, or Google Classroom API calls.
+Current runtime code uses direct Google Sign-In through `google_sign_in`, and Android sign-in is confirmed working. It requests Classroom read scopes and calls the Google Classroom API for one fixed Talkware course ID. It does not include Firebase Auth, backend calls, client secrets, a course browser, wallet behavior, or real points logic.
 
 The Android OAuth client ID is registered in Google Cloud with package name and SHA-1, and is not used as Dart `serverClientId`. Android uses the Web OAuth client ID as the default `serverClientId`, with `GOOGLE_SERVER_CLIENT_ID` still available as an override. Setup notes live in `docs/setup/google-sign-in.md`.
+
+Classroom access uses `Authorization: Bearer <access_token>` headers from `GoogleSignInAccount.authorizationClient`. The current implementation loads:
+
+- `GET /v1/courses/865036664004`
+- `GET /v1/courses/865036664004/courseWork`
+- `GET /v1/courses/865036664004/announcements`
+
+The human-facing Classroom URL uses `/c/ODY1MDM2NjY0MDA0`; the API calls use the decoded numeric course ID.

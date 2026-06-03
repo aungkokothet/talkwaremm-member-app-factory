@@ -1,11 +1,17 @@
 class ClassroomContext {
   const ClassroomContext({
     required this.courseName,
-    required this.assignmentTitle,
-    required this.assignmentStatus,
+    this.courseDetails,
+    this.courseWorkTitle,
+    this.courseWorkStatus,
+    this.announcementText,
+    this.errorMessage,
   });
 
   final String courseName;
-  final String assignmentTitle;
-  final String assignmentStatus;
+  final String? courseDetails;
+  final String? courseWorkTitle;
+  final String? courseWorkStatus;
+  final String? announcementText;
+  final String? errorMessage;
 }

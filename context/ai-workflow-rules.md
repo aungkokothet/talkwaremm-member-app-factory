@@ -84,6 +84,6 @@ For documentation-only synchronization, do not modify runtime code.
 
 ## Week 2 Implementation Guardrail
 
-Google Sign-In is now implemented through the official `google_sign_in` package and works on Android. Do not describe Google Classroom, member status, Talkware Points, wallet behavior, backend auth, client secrets, or persistent auth as real yet.
+Google Sign-In is now implemented through the official `google_sign_in` package and works on Android. Google Classroom is real only for one fixed Talkware course API boundary. Do not describe all-course browsing, member status, Talkware Points, wallet behavior, backend auth, client secrets, or persistent auth as real yet.
 
 The current Week 2 code already has `auth`, `member`, and `classroom` feature modules. Future implementation should extend those modules and keep the existing profile route composition unless a product decision explicitly changes the flow.

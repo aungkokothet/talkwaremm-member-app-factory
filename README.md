@@ -12,7 +12,7 @@ The goal is to learn how real software grows:
 - document decisions as the system changes
 - use AI assistance with clear context and workflow rules
 
-Week 1 established the stable Builder Profile App baseline. Week 2 is the current evolution toward a Talkware Member App. Real Google Sign-In now works on Android as the first Week 2 integration, while member status, Classroom context, and points remain mock-first.
+Week 1 established the stable Builder Profile App baseline. Week 2 is the current evolution toward a Talkware Member App. Real Google Sign-In now works on Android, and the Classroom card now loads one fixed Talkware course through the Google Classroom API. Member status remains mock-first, and points remain a placeholder.
 
 ## Week-by-Week Evolution
 
@@ -30,7 +30,7 @@ Students should use Week 1 to understand and customize a working app safely.
 
 ### Week 2: Current Evolution
 
-Week 2 evolves the same codebase toward an operational Talkware Member App. The current branch includes Android Google Sign-In through the official `google_sign_in` package, mock member status, and mock Classroom context. Real Classroom API work should happen only when configuration is ready.
+Week 2 evolves the same codebase toward an operational Talkware Member App. The current branch includes Android Google Sign-In through the official `google_sign_in` package, fixed Talkware Classroom course data through Google Classroom API calls, and mock member status. It does not show all Classroom courses or implement a course browser.
 
 Do not rewrite the Week 1 app. Extend it.
 
@@ -92,3 +92,8 @@ Run the app with:
 ```bash
 flutter run
 ```
+
+## Setup Notes
+
+- Google Sign-In: `docs/setup/google-sign-in.md`
+- Google Classroom API: `docs/setup/google-classroom-api.md`

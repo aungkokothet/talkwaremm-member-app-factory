@@ -390,6 +390,44 @@ Android Google Sign-In works. The confusing default config name was clarified fr
 
 ---
 
+# 2026-06-03 - Fixed Talkware Classroom Course Selected for First Classroom Integration
+
+## Decision
+
+The first real Classroom integration loads one fixed Talkware Classroom course. The Classroom URL code is `ODY1MDM2NjY0MDA0`; the API course ID used in `courses.get` calls is `865036664004`.
+
+## Reason
+
+Week 2 needs a controlled Classroom boundary that proves OAuth and real course data without adding a course browser, name filtering, API key, backend, Firebase Auth, wallet, or points logic.
+
+## Result
+
+The app requests the approved Classroom read scopes through Google Sign-In authorization, obtains OAuth bearer headers from the signed-in Google account, and calls:
+
+- `GET https://classroom.googleapis.com/v1/courses/865036664004`
+- `GET https://classroom.googleapis.com/v1/courses/865036664004/courseWork`
+- `GET https://classroom.googleapis.com/v1/courses/865036664004/announcements`
+
+The Profile Classroom card now shows real fixed-course data when available, with friendly loading, permission, access, and temporary-unavailable states. Member status remains mock-first. Talkware Points remains a placeholder.
+
+---
+
+# 2026-06-03 - Classroom Uses OAuth Bearer Token Only
+
+## Decision
+
+Classroom API requests use `Authorization: Bearer <access_token>` from Google Sign-In authorization. The app does not use an API key.
+
+## Reason
+
+The Classroom data is user-specific and must respect whether the signed-in Google account has access to the fixed Talkware course.
+
+## Result
+
+The app stays mobile-only and OAuth-only for Week 2. No Firebase Auth, backend, API key, client secret, wallet logic, or real points logic is added. Member status remains mock-first, and Talkware Points remains a placeholder.
+
+---
+
 # Core Long-Term Principle
 
 The project should evolve like a real operational software system.

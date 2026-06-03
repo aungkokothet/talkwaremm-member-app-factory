@@ -13,6 +13,9 @@ class FakeAuthService implements AuthService {
   );
 
   @override
+  Future<AppIdentity?> restoreSession() async => null;
+
+  @override
   Future<AppIdentity?> signIn() async => identity;
 
   @override
@@ -68,5 +71,6 @@ void main() {
 
     expect(find.text(AppString.signInTitle), findsOneWidget);
     expect(find.text(AppString.signInWithGoogle), findsOneWidget);
+    expect(find.text(AppString.signingInMessage), findsNothing);
   });
 }

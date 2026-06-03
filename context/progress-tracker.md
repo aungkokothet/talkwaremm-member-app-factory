@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Week 2 real Google Sign-In integration implemented, with mock-first member/Classroom/points surfaces preserved.
+Week 2 real Google Sign-In and fixed Talkware Classroom course integration implemented, with mock-first member status and placeholder points preserved.
 
 ## Stable Baseline
 
@@ -67,22 +67,28 @@ Week 1 includes:
 - Web OAuth client ID wired as the default Android `serverClientId`
 - Android Google Sign-In manually confirmed working
 - Confusing `_defaultAndroidServerClientId` config name replaced with `_defaultWebServerClientId`
+- Assignment 1 complete: Google Identity Activation
+- Google Classroom read scopes added to the Google authorization request
+- Fixed Talkware Classroom course API lookup added for API course ID `865036664004`; the Classroom URL code is `ODY1MDM2NjY0MDA0`
+- Classroom coursework and announcements API calls added with friendly unavailable states
+- Assignment 2 complete: fixed-course real Classroom integration
+- `flutter analyze` passes for the Week 2 checkpoint
+- `flutter test` passes for the Week 2 checkpoint
 
 ## Current Goal
 
 Continue Week 2 from the implementation branch while preserving Week 1 as the frozen learning milestone.
 
-The current implementation uses real Google Sign-In code and evolves the existing profile screen directly. It does not include real Classroom API calls, secrets, credentials committed to source, persistent auth, or backend integration.
+The current implementation uses real Google Sign-In code, fixed Talkware Classroom API calls, and evolves the existing profile screen directly. It does not include secrets, credentials committed to source, persistent auth, backend integration, real member status, or real points logic.
 
 Week 2 participants should work from `feature/week2-member-app`. New students starting the Week 1 starter app should use `main`.
 
 ## In Progress
 
-- Android Google Sign-In boundary stabilized
+- Week 2 reflection and future participation assignments
 
 ## Next Up
 
-- Replace mock Classroom data with Google Classroom API integration
 - Add profile UI polish after product flow is confirmed
 - Expand tests around member status, Classroom context, and drawer navigation states
 - Centralize remaining small inline dimensions in widgets
@@ -90,12 +96,10 @@ Week 2 participants should work from `feature/week2-member-app`. New students st
 ## Not Started
 
 - Real authenticated member persistence
-- Real Google Classroom integration
 - participation economy features
 
 ## Open Questions
 
-- Exact Week 2 implementation order for auth, member profile, and Classroom context
 - Whether to move OAuth IDs out of source and fully into platform config before production
 - Whether auth state should persist locally before a backend exists
 - Whether the placeholder `G` should be replaced with an official Google brand asset
@@ -108,7 +112,7 @@ Week 2 participants should work from `feature/week2-member-app`. New students st
 - `main` should not automatically absorb weekly work unless the course owner explicitly changes the branch strategy.
 - The app lands on the Sign In screen, then navigates to the evolved Profile screen.
 - Sign In now uses the real `google_sign_in` package through `GoogleAuthService`.
-- Classroom remains mock-first.
+- Classroom now loads one fixed Talkware course through the real Google Classroom API.
 - Member status remains mock-first.
 - Talkware Points remains a placeholder.
 - The `context/` folder is living documentation and should be updated whenever architecture or workflow changes.

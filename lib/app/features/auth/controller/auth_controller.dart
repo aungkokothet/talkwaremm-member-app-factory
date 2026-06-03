@@ -15,8 +15,38 @@ class AuthController extends BaseController {
 
   bool get isSignedIn => identity.value != null;
 
+  @override
+  void onReady() {
+    super.onReady();
+    restoreExistingSession();
+  }
+
+  Future<void> restoreExistingSession() async {
+    showLoading();
+    showMessage(AppString.restoreSessionMessage);
+
+    try {
+      final restoredIdentity = await _authService.restoreSession();
+
+      if (restoredIdentity == null) {
+        showMessage('');
+        return;
+      }
+
+      identity.value = restoredIdentity;
+      Get.offNamed(Routes.profileScreen);
+    } on AuthFailure catch (error) {
+      showMessage(error.message);
+    } catch (_) {
+      showMessage(AppString.restoreSessionErrorMessage);
+    } finally {
+      hideLoading();
+    }
+  }
+
   Future<void> signInAndOpenProfile() async {
     showLoading();
+    showMessage(AppString.signingInMessage);
 
     try {
       final signedInIdentity = await _authService.signIn();
@@ -50,6 +80,7 @@ class AuthController extends BaseController {
     }
 
     identity.value = null;
+    showMessage('');
   }
 
   Future<void> signOutAndReturnToSignIn() async {

@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Week 2 - Talkware Member App real Google Sign-In integration foundation.
+Week 2 - Talkware Member App Google identity and fixed Classroom course integration foundation.
 
 This work lives on the Week 2 learning track branch, `feature/week2-member-app`. `main` remains the stable course starter and Week 1 baseline for new students.
 
@@ -20,7 +20,7 @@ The app is expected to evolve toward:
 
 This is no longer just a static profile customization exercise. The app is becoming a real operational member surface for Talkware participants.
 
-Important: Week 2 runtime implementation has started. Real Google Sign-In works on Android through the official `google_sign_in` package. Android OAuth is registered in Google Cloud with package name and SHA-1, and the Web OAuth client ID is wired as Android's `serverClientId`. Classroom API integration is not implemented yet.
+Important: Week 2 runtime implementation has started. Real Google Sign-In works on Android through the official `google_sign_in` package. Android OAuth is registered in Google Cloud with package name and SHA-1, and the Web OAuth client ID is wired as Android's `serverClientId`. Google Classroom API integration now loads one fixed Talkware course by course ID; it does not show all courses or implement a course browser.
 
 ## Previous Stable Baseline
 
@@ -102,14 +102,15 @@ The following systems and patterns must remain intact unless explicitly changed.
 - real Google display name, email, and profile photo rendering when available
 - clean fallback avatar when Google profile photo is unavailable
 - Talkware member status badge
-- Classroom context card with sample course and assignment data
+- Classroom context card with real Google Classroom data for one fixed Talkware course
+- fixed Talkware Classroom course lookup by course ID
+- Classroom coursework and announcement requests with friendly unavailable states
 - future Talkware Points placeholder card
 - profile drawer with Profile and Sign Out actions
 
 ### Remaining Planned Features
 
 - authenticated member persistence
-- real Google Classroom integration
 - production member status source
 - operational member profile polish
 
@@ -122,7 +123,7 @@ lib/app/features/classroom/
 lib/app/features/profile/
 ```
 
-These modules now exist on `feature/week2-member-app`. The auth module now has a real Android Google Sign-In boundary; member status, Classroom, and points remain mock-first.
+These modules now exist on `feature/week2-member-app`. The auth module now has a real Android Google Sign-In boundary. The Classroom module now calls the real Google Classroom API for one fixed Talkware course. Member status remains mock-first, and Talkware Points remains a placeholder.
 
 ## Branch Strategy
 

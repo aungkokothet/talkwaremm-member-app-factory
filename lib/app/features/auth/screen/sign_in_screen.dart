@@ -33,6 +33,7 @@ class SignInScreen extends BaseView<AuthController> {
                         children: [
                           const SizedBox(height: AppDimens.sectionGap),
                           _SignInContent(
+                            controller: controller,
                             onSignIn: controller.signInAndOpenProfile,
                           ),
                           const Spacer(),
@@ -52,8 +53,9 @@ class SignInScreen extends BaseView<AuthController> {
 }
 
 class _SignInContent extends StatelessWidget {
-  const _SignInContent({required this.onSignIn});
+  const _SignInContent({required this.controller, required this.onSignIn});
 
+  final AuthController controller;
   final VoidCallback onSignIn;
 
   @override
@@ -77,21 +79,29 @@ class _SignInContent extends StatelessWidget {
           style: textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
         ),
         const SizedBox(height: AppDimens.sectionGap),
-        _GoogleSignInButton(onPressed: onSignIn),
         Obx(() {
-          final message = Get.find<AuthController>().message.value;
+          final isLoading = controller.isLoading.value;
+          final message = controller.message.value;
 
-          if (message.isEmpty) {
-            return const SizedBox.shrink();
-          }
-
-          return Padding(
-            padding: const EdgeInsets.only(top: AppDimens.itemGap),
-            child: Text(
-              message,
-              textAlign: TextAlign.center,
-              style: textTheme.bodyMedium?.copyWith(color: AppColors.secondary),
-            ),
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _GoogleSignInButton(
+                isLoading: isLoading,
+                onPressed: isLoading ? null : onSignIn,
+              ),
+              if (message.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: AppDimens.itemGap),
+                  child: Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: textTheme.bodyMedium?.copyWith(
+                      color: AppColors.secondary,
+                    ),
+                  ),
+                ),
+            ],
           );
         }),
       ],
@@ -121,9 +131,10 @@ class _BrandingBlock extends StatelessWidget {
 }
 
 class _GoogleSignInButton extends StatelessWidget {
-  const _GoogleSignInButton({required this.onPressed});
+  const _GoogleSignInButton({required this.isLoading, required this.onPressed});
 
-  final VoidCallback onPressed;
+  final bool isLoading;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +172,11 @@ class _GoogleSignInButton extends StatelessWidget {
               ),
             ),
             const SizedBox(width: AppDimens.itemGap),
-            const Text(AppString.signInWithGoogle),
+            Text(
+              isLoading
+                  ? AppString.signInLoadingLabel
+                  : AppString.signInWithGoogle,
+            ),
           ],
         ),
       ),

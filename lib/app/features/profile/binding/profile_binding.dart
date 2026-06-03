@@ -3,6 +3,8 @@ import 'package:profile_challenge_app/app/features/auth/controller/auth_controll
 import 'package:profile_challenge_app/app/features/auth/service/auth_service.dart';
 import 'package:profile_challenge_app/app/features/auth/service/google_auth_service.dart';
 import 'package:profile_challenge_app/app/features/classroom/controller/classroom_controller.dart';
+import 'package:profile_challenge_app/app/features/classroom/service/classroom_service.dart';
+import 'package:profile_challenge_app/app/features/classroom/service/google_classroom_service.dart';
 import 'package:profile_challenge_app/app/features/member/controller/member_controller.dart';
 import 'package:profile_challenge_app/app/features/profile/controller/profile_controller.dart';
 
@@ -15,6 +17,12 @@ class ProfileBinding extends Bindings {
     }
     if (!Get.isRegistered<AuthController>()) {
       Get.lazyPut(() => AuthController(), fenix: true);
+    }
+    if (!Get.isRegistered<ClassroomService>()) {
+      Get.lazyPut<ClassroomService>(
+        () => GoogleClassroomService(),
+        fenix: true,
+      );
     }
     Get.lazyPut(() => ClassroomController(), fenix: true);
     Get.lazyPut(() => MemberController(), fenix: true);

@@ -25,6 +25,24 @@ class GoogleAuthService implements AuthService {
   }
 
   @override
+  Future<AppIdentity?> restoreSession() async {
+    await _initialize();
+
+    final authentication = _googleSignIn.attemptLightweightAuthentication();
+    final account = await authentication;
+
+    if (account == null) {
+      return null;
+    }
+
+    return AppIdentity.fromGoogleAccount(
+      account,
+      classroomAuthHeaders: await account.authorizationClient
+          .authorizationHeaders(GoogleSignInConfig.classroomScopes),
+    );
+  }
+
+  @override
   Future<AppIdentity?> signIn() async {
     await _initialize();
 
@@ -34,7 +52,14 @@ class GoogleAuthService implements AuthService {
 
     try {
       final account = await _googleSignIn.authenticate();
-      return AppIdentity.fromGoogleAccount(account);
+      return AppIdentity.fromGoogleAccount(
+        account,
+        classroomAuthHeaders: await account.authorizationClient
+            .authorizationHeaders(
+              GoogleSignInConfig.classroomScopes,
+              promptIfNecessary: true,
+            ),
+      );
     } on GoogleSignInException catch (error) {
       switch (error.code) {
         case GoogleSignInExceptionCode.canceled:

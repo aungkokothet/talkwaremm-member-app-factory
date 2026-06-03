@@ -2,7 +2,7 @@
 
 ## UI Direction
 
-The current UI is the Week 2 mock-first Talkware Member App evolution of the Week 1 Builder Profile App baseline. It remains clean, professional, beginner-readable, and easy to evolve.
+The current UI is the Week 2 Talkware Member App evolution of the Week 1 Builder Profile App baseline. It remains clean, professional, beginner-readable, and easy to evolve.
 
 Week 2 uses the same centralized resources, theme, and reusable section-based layout patterns from Week 1.
 
@@ -107,10 +107,10 @@ Current Week 2 UI additions:
 - real Google identity header on the profile screen
 - hamburger drawer with Profile and Sign Out
 - member status section
-- classroom participation summary
+- fixed Talkware Classroom course summary
 - future points placeholder card
 
-The app starts on Sign In, then routes to the evolved profile screen after Google Sign-In succeeds. Classroom data, member status, and points systems remain mock-first.
+The app starts on Sign In, then routes to the evolved profile screen after Google Sign-In succeeds. The Classroom card now loads one fixed Talkware course from the real Google Classroom API. Member status remains mock-first, and points remains a placeholder.
 
 ### Sign In Screen Reality
 

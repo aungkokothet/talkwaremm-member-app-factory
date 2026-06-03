@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -41,6 +43,12 @@ class ProfileScreen extends BaseView<ProfileController> {
           final memberStatus = memberController.status.value;
           final classroom = classroomController.context.value;
 
+          if (identity == null) {
+            classroomController.reset();
+          } else {
+            unawaited(classroomController.loadTalkwareCourse(identity));
+          }
+
           return ListView(
             padding: const EdgeInsets.all(AppDimens.screenPadding),
             children: [
@@ -56,7 +64,11 @@ class ProfileScreen extends BaseView<ProfileController> {
               const SizedBox(height: AppDimens.itemGap),
               SectionCard(
                 title: AppString.classroomTitle,
-                child: _ClassroomContextCard(classroom: classroom),
+                child: _ClassroomContextCard(
+                  classroom: classroom,
+                  isLoading: classroomController.isLoading.value,
+                  message: classroomController.message.value,
+                ),
               ),
               const SizedBox(height: AppDimens.itemGap),
               const SectionCard(
@@ -262,22 +274,69 @@ class _StatusBadge extends StatelessWidget {
 }
 
 class _ClassroomContextCard extends StatelessWidget {
-  const _ClassroomContextCard({required this.classroom});
+  const _ClassroomContextCard({
+    required this.classroom,
+    required this.isLoading,
+    required this.message,
+  });
 
-  final ClassroomContext classroom;
+  final ClassroomContext? classroom;
+  final bool isLoading;
+  final String message;
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final classroom = this.classroom;
+
+    if (isLoading) {
+      return const Row(
+        children: [
+          SizedBox(
+            width: 18,
+            height: 18,
+            child: CircularProgressIndicator(strokeWidth: 2),
+          ),
+          SizedBox(width: AppDimens.itemGap),
+          Expanded(child: Text(AppString.classroomLoadingMessage)),
+        ],
+      );
+    }
+
+    if (message.isNotEmpty) {
+      return Text(
+        message,
+        style: textTheme.bodyMedium?.copyWith(color: AppColors.secondary),
+      );
+    }
+
+    if (classroom == null) {
+      return const Text(AppString.classroomLoadingMessage);
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(classroom.courseName, style: textTheme.bodyLarge),
-        const SizedBox(height: AppDimens.itemGap),
-        Text(classroom.assignmentTitle),
-        const SizedBox(height: AppDimens.itemGap / 2),
-        Text(classroom.assignmentStatus, style: textTheme.bodyMedium),
+        if (classroom.courseDetails != null) ...[
+          const SizedBox(height: AppDimens.itemGap / 2),
+          Text(classroom.courseDetails!),
+        ],
+        if (classroom.courseWorkTitle != null) ...[
+          const SizedBox(height: AppDimens.itemGap),
+          Text(AppString.classroomCourseWorkLabel, style: textTheme.labelLarge),
+          const SizedBox(height: AppDimens.itemGap / 2),
+          Text(classroom.courseWorkTitle!),
+        ],
+        if (classroom.announcementText != null) ...[
+          const SizedBox(height: AppDimens.itemGap),
+          Text(
+            AppString.classroomAnnouncementLabel,
+            style: textTheme.labelLarge,
+          ),
+          const SizedBox(height: AppDimens.itemGap / 2),
+          Text(classroom.announcementText!),
+        ],
       ],
     );
   }

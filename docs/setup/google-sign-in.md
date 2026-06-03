@@ -4,6 +4,8 @@ Real Google Sign-In is implemented in the Flutter auth boundary. The current con
 
 Do not commit secrets. OAuth client IDs are not secrets, but project-specific values should still be kept isolated in Google Cloud, platform config files, or dart defines when needed.
 
+Classroom API setup is documented separately in `docs/setup/google-classroom-api.md`.
+
 ## Current Runtime Truth
 
 - Android Google Sign-In works.
@@ -11,10 +13,11 @@ Do not commit secrets. OAuth client IDs are not secrets, but project-specific va
 - Web OAuth client exists so Android can use its client ID as `serverClientId`.
 - Web browser sign-in UI is not configured.
 - iOS Google Sign-In is not configured.
-- Google Classroom remains mock-first.
+- Google Classroom API is now used for one fixed Talkware course.
 - Talkware member status remains mock-first.
 - Talkware Points remains a placeholder.
-- No Firebase Auth, backend, Classroom scopes, wallet, or points runtime has been added.
+- Classroom read scopes are requested through Google Sign-In authorization.
+- No Firebase Auth, backend, wallet, or points runtime has been added.
 
 ## Android OAuth Client
 
@@ -102,6 +105,10 @@ Because a Web OAuth client now exists, its client ID is used as `serverClientId`
 - For the current Android-only setup, the Android OAuth client is handled in Google Cloud by package name and SHA-1 registration.
 - The Web OAuth client ID is configured as the default `serverClientId`.
 - `GOOGLE_SERVER_CLIENT_ID` can still override the default for future environments.
+- Classroom data uses OAuth bearer headers from the signed-in Google account.
+- The Classroom URL code is `ODY1MDM2NjY0MDA0`.
+- The Classroom API course ID used in `/v1/courses/{id}` calls is `865036664004`.
+- The app does not list all Classroom courses.
 
 ## Android Verification
 

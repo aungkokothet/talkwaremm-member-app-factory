@@ -5,19 +5,29 @@ class AppIdentity {
     required this.fullName,
     required this.email,
     this.photoUrl,
+    this.classroomAuthHeaders,
   });
 
-  factory AppIdentity.fromGoogleAccount(GoogleSignInAccount account) {
+  factory AppIdentity.fromGoogleAccount(
+    GoogleSignInAccount account, {
+    Map<String, String>? classroomAuthHeaders,
+  }) {
+    final displayName = account.displayName?.trim();
+
     return AppIdentity(
-      fullName: account.displayName ?? account.email,
-      email: account.email,
-      photoUrl: account.photoUrl,
+      fullName: displayName == null || displayName.isEmpty
+          ? account.email
+          : displayName,
+      email: account.email.trim(),
+      photoUrl: account.photoUrl?.trim(),
+      classroomAuthHeaders: classroomAuthHeaders,
     );
   }
 
   final String fullName;
   final String email;
   final String? photoUrl;
+  final Map<String, String>? classroomAuthHeaders;
 
   String get initials {
     final parts = fullName

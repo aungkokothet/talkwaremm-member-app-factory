@@ -47,7 +47,7 @@ Week 2 reframes the app as a Talkware Member App. The app is expected to evolve 
 - Google Classroom-connected learning context
 - future participation economy foundations
 
-Important: Week 2 now has Android Google Sign-In working through the official `google_sign_in` package. Web browser sign-in and iOS sign-in are not configured. Classroom API integration is not implemented yet.
+Important: Week 2 now has Android Google Sign-In working through the official `google_sign_in` package. Web browser sign-in and iOS sign-in are not configured. Classroom API integration now loads one fixed Talkware course by course ID.
 
 ## Core User Flow Today
 
@@ -55,7 +55,7 @@ Important: Week 2 now has Android Google Sign-In working through the official `g
 2. The Sign In screen opens as the initial screen.
 3. Google Sign-In authenticates the user and stores an in-memory app identity.
 4. The Profile screen composes auth, member, and Classroom controller state.
-5. The profile shows real Google name/email/photo when available, mock Talkware member status, mock Classroom context, and future points.
+5. The profile shows real Google name/email/photo when available, mock Talkware member status, real fixed-course Classroom context, and future points.
 6. The hamburger drawer provides Profile and Sign Out actions.
 
 ## Runtime Reality Today
@@ -65,9 +65,10 @@ Important: Week 2 now has Android Google Sign-In working through the official `g
 - Google identity is held in memory only and is not persisted locally.
 - The Android OAuth client is registered by package name and SHA-1.
 - The Web OAuth client ID is used as Android's `serverClientId`.
-- No Google Classroom API client is installed.
+- Google Classroom API calls are implemented with OAuth bearer headers for one fixed Talkware course.
+- Classroom coursework and announcement calls are optional and have friendly unavailable states.
 - No backend, credentials, secrets, or persistent session storage are implemented.
-- Mock member and Classroom data comes from `AppString` constants through simple GetX controllers.
+- Mock member data comes from `AppString` constants through a simple GetX controller.
 
 ## Long-Term Success Criteria
 

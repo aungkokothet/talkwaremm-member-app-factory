@@ -8,6 +8,12 @@ class AppString {
   static const String signInTitle = 'Log In';
   static const String signInSubtitle = 'Please log in to continue.';
   static const String signInWithGoogle = 'Sign in with Google';
+  static const String signInLoadingLabel = 'Please wait...';
+  static const String signingInMessage = 'Opening Google Sign-In...';
+  static const String restoreSessionMessage =
+      'Checking for an existing Google session...';
+  static const String restoreSessionErrorMessage =
+      'Could not restore a previous Google session. Please sign in again.';
   static const String signInErrorTitle = 'Sign-in failed';
   static const String signInErrorMessage =
       'Please check Google Sign-In setup and try again.';
@@ -28,6 +34,24 @@ class AppString {
   static const String classroomCourseName = 'Talkware Builder Training';
   static const String classroomAssignmentTitle = 'Week 2 Member App Foundation';
   static const String classroomAssignmentStatus = 'Ready to start';
+  static const String classroomLoadingMessage =
+      'Loading Talkware Classroom data...';
+  static const String classroomCourseNameUnavailable =
+      'Talkware Classroom Course';
+  static const String classroomNoCourseAccess =
+      'You are signed in, but this Google account does not have access to the Talkware Classroom course.';
+  static const String classroomPermissionNotGranted =
+      'Classroom permission was not granted. Please sign out and sign in again.';
+  static const String classroomTemporaryUnavailable =
+      'Classroom data is temporarily unavailable.';
+  static const String classroomCourseWorkUnavailable =
+      'Coursework is unavailable with the current Classroom permission.';
+  static const String classroomAnnouncementUnavailable =
+      'Announcements are unavailable with the current Classroom permission.';
+  static const String classroomNoRecentAcademicContext =
+      'No recent Classroom activity is available yet.';
+  static const String classroomCourseWorkLabel = 'Recent coursework';
+  static const String classroomAnnouncementLabel = 'Announcement';
   static const String pointsTitle = 'Talkware Points';
   static const String pointsPlaceholder =
       'Points are reserved for a future participation economy phase.';
