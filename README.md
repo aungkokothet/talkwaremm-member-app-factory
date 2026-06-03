@@ -56,7 +56,7 @@ Start Week 1:
 git checkout v0.1-week1-first-challenge
 ```
 
-Return to latest stable:
+Return to starter baseline:
 
 ```bash
 git checkout main
