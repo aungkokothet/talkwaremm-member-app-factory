@@ -41,7 +41,7 @@ Week 1 is the stable baseline. It should remain accessible through its frozen ta
 
 Week 2 is the current evolution and lives on `feature/week2-member-app`.
 
-Future weekly branches, such as `feature/week3-loyalty-structure`, are persistent learning tracks, not throwaway branches.
+Future weekly branches, such as `feature/week3-member-app-with-wallet`, are persistent learning tracks, not throwaway branches.
 
 Future weeks should extend the same app rather than creating unrelated projects.
 
@@ -49,7 +49,7 @@ Future weeks should extend the same app rather than creating unrelated projects.
 
 - `main` represents the stable course starter / Week 1 baseline.
 - `feature/week2-member-app` represents the Week 2 Talkware Member App evolution.
-- `feature/week3-loyalty-structure` is the planned Week 3 evolution branch.
+- `feature/week3-member-app-with-wallet` is the Week 3 Member App with Wallet evolution branch.
 - tags preserve frozen weekly milestones.
 - weekly feature branches hold course evolution tracks.
 - `main` should not automatically absorb weekly work unless the course owner explicitly changes the branch strategy.
@@ -84,6 +84,6 @@ For documentation-only synchronization, do not modify runtime code.
 
 ## Week 2 Implementation Guardrail
 
-Google Sign-In is now implemented through the official `google_sign_in` package and works on Android. Google Classroom is real only for one fixed Talkware course API boundary. Do not describe all-course browsing, member status, Talkware Points, wallet behavior, backend auth, client secrets, or persistent auth as real yet.
+Google Sign-In is implemented through the official `google_sign_in` package and works on Android. Google Classroom is real only for one fixed Talkware course API boundary. Talkware Points wallet behavior is real only for the Week 3 on-device mobile milestone: local config, customer access ZIP import, passcode-encrypted customer secret storage, direct Horizon/NowNodes balance reads, QR-based send of the configured asset, local signing, direct submission, and local history. Do not describe all-course browsing, production member status, backend auth, backend wallet credential fetches, backend signing, arbitrary assets, XLM transfer, client secrets, or persistent Google auth as real yet.
 
-The current Week 2 code already has `auth`, `member`, and `classroom` feature modules. Future implementation should extend those modules and keep the existing profile route composition unless a product decision explicitly changes the flow.
+The current Week 3 code has `auth`, `member`, `classroom`, and `wallet` feature modules. Future implementation should extend those modules and keep the existing profile route composition unless a product decision explicitly changes the flow.

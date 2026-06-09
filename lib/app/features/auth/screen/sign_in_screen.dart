@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:profile_challenge_app/app/constant/resources/app_colors.dart';
 import 'package:profile_challenge_app/app/constant/resources/app_dimens.dart';
-import 'package:profile_challenge_app/app/constant/resources/app_images.dart';
 import 'package:profile_challenge_app/app/constant/resources/app_string.dart';
 import 'package:profile_challenge_app/app/core/base/base_view.dart';
+import 'package:profile_challenge_app/app/design/talkware_radius.dart';
+import 'package:profile_challenge_app/app/design/talkware_spacing.dart';
+import 'package:profile_challenge_app/app/design/widgets/talkware_logo.dart';
 import 'package:profile_challenge_app/app/features/auth/controller/auth_controller.dart';
 
 class SignInScreen extends BaseView<AuthController> {
@@ -31,7 +31,7 @@ class SignInScreen extends BaseView<AuthController> {
                       ),
                       child: Column(
                         children: [
-                          const SizedBox(height: AppDimens.sectionGap),
+                          const SizedBox(height: TalkwareSpacing.xl),
                           _SignInContent(
                             controller: controller,
                             onSignIn: controller.signInAndOpenProfile,
@@ -61,50 +61,60 @@ class _SignInContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const _BrandingBlock(),
-        const SizedBox(height: AppDimens.sectionGap),
-        Text(
-          AppString.signInTitle,
-          textAlign: TextAlign.center,
-          style: textTheme.headlineMedium,
-        ),
-        const SizedBox(height: AppDimens.itemGap),
-        Text(
-          AppString.signInSubtitle,
-          textAlign: TextAlign.center,
-          style: textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
-        ),
-        const SizedBox(height: AppDimens.sectionGap),
-        Obx(() {
-          final isLoading = controller.isLoading.value;
-          final message = controller.message.value;
-
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _GoogleSignInButton(
-                isLoading: isLoading,
-                onPressed: isLoading ? null : onSignIn,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(TalkwareSpacing.lg),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const _BrandingBlock(),
+            const SizedBox(height: TalkwareSpacing.lg),
+            Text(
+              AppString.signInTitle,
+              textAlign: TextAlign.center,
+              style: textTheme.headlineMedium?.copyWith(
+                color: colorScheme.onSurface,
               ),
-              if (message.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.only(top: AppDimens.itemGap),
-                  child: Text(
-                    message,
-                    textAlign: TextAlign.center,
-                    style: textTheme.bodyMedium?.copyWith(
-                      color: AppColors.secondary,
-                    ),
+            ),
+            const SizedBox(height: TalkwareSpacing.xs),
+            Text(
+              AppString.signInSubtitle,
+              textAlign: TextAlign.center,
+              style: textTheme.bodyLarge?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: TalkwareSpacing.lg),
+            Obx(() {
+              final isLoading = controller.isLoading.value;
+              final message = controller.message.value;
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _GoogleSignInButton(
+                    isLoading: isLoading,
+                    onPressed: isLoading ? null : onSignIn,
                   ),
-                ),
-            ],
-          );
-        }),
-      ],
+                  if (message.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(top: TalkwareSpacing.sm),
+                      child: Text(
+                        message,
+                        textAlign: TextAlign.center,
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: colorScheme.error,
+                        ),
+                      ),
+                    ),
+                ],
+              );
+            }),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -115,16 +125,27 @@ class _BrandingBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Column(
       children: [
-        SvgPicture.asset(
-          AppImages.logo,
-          width: AppDimens.signInLogoSize,
-          height: AppDimens.signInLogoSize,
+        Container(
+          padding: const EdgeInsets.all(TalkwareSpacing.xs),
+          decoration: BoxDecoration(
+            color: colorScheme.primaryContainer.withValues(alpha: 0.65),
+            borderRadius: BorderRadius.circular(TalkwareRadius.lg),
+            border: Border.all(color: colorScheme.outlineVariant),
+          ),
+          child: const TalkwareLogo(size: 56),
         ),
-        const SizedBox(height: AppDimens.itemGap),
-        Text(AppString.signInBrandName, style: textTheme.titleLarge),
+        const SizedBox(height: TalkwareSpacing.sm),
+        Text(
+          AppString.signInBrandName,
+          style: textTheme.titleLarge?.copyWith(
+            color: colorScheme.onSurface,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
       ],
     );
   }
@@ -138,17 +159,19 @@ class _GoogleSignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return SizedBox(
       width: double.infinity,
-      height: AppDimens.signInButtonHeight,
+      height: 52,
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.textPrimary,
-          backgroundColor: AppColors.surface,
-          side: const BorderSide(color: AppColors.border),
+          foregroundColor: colorScheme.onPrimary,
+          backgroundColor: colorScheme.primary,
+          side: BorderSide(color: colorScheme.primary),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimens.cardRadius),
+            borderRadius: BorderRadius.circular(TalkwareRadius.md),
           ),
         ),
         child: Row(
@@ -159,23 +182,28 @@ class _GoogleSignInButton extends StatelessWidget {
               height: AppDimens.signInProviderIconSize,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: AppColors.surface,
-                border: Border.all(color: AppColors.border),
+                color: colorScheme.onPrimary,
+                border: Border.all(color: colorScheme.onPrimary),
                 shape: BoxShape.circle,
               ),
               child: Text(
                 'G',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppColors.primary,
+                  color: colorScheme.primary,
                   fontWeight: FontWeight.w700,
                 ),
               ),
             ),
-            const SizedBox(width: AppDimens.itemGap),
-            Text(
-              isLoading
-                  ? AppString.signInLoadingLabel
-                  : AppString.signInWithGoogle,
+            const SizedBox(width: TalkwareSpacing.sm),
+            Flexible(
+              child: Text(
+                isLoading
+                    ? AppString.signInLoadingLabel
+                    : AppString.signInWithGoogle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontWeight: FontWeight.w700),
+              ),
             ),
           ],
         ),

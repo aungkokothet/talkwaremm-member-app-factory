@@ -38,14 +38,32 @@ Talkware Member App evolution.
 Focus:
 
 - Android Google Sign-In as the first real Week 2 integration
-- Google Classroom integration planning
+- fixed Google Classroom integration
 - Talkware member activation
 - operational app thinking
 - participation economy foundations
 
 Week 2 evolves the Week 1 architecture. Do not rewrite the app from scratch.
 
-Important: Week 2 runtime implementation has started. Real Google Sign-In works on Android through `google_sign_in`. Google Classroom integration, client secrets, backend calls, and persistent authenticated state are not implemented yet unless explicitly requested.
+Important: Week 2 runtime implementation exists. Real Google Sign-In works on Android through `google_sign_in`, and fixed-course Google Classroom integration is implemented. Client secrets, backend auth, all-course browsing, and persistent authenticated Google state are not implemented unless explicitly requested.
+
+### Week 3
+
+Member App with Wallet evolution.
+
+Focus:
+
+- on-device Talkware Points wallet activation
+- customer access ZIP import
+- passcode-encrypted customer secret storage
+- direct Horizon/NowNodes balance reads
+- QR-based recipient validation
+- local transaction signing and submission
+- local transaction history
+
+Week 3 evolves the Week 2 member app. Do not rewrite the app from scratch.
+
+Important: Week 3 wallet runtime is implemented for the configured Talkware Points asset. Backend wallet credential fetches, backend signing, arbitrary asset transfer, XLM transfer, marketplace transfer, and a full Horizon history explorer are not implemented unless explicitly requested.
 
 ## Context Files
 
@@ -129,7 +147,7 @@ Weekly feature branches are persistent learning tracks, not throwaway branches.
 Example:
 
 - `feature/week2-member-app`
-- `feature/week3-loyalty-structure`
+- `feature/week3-member-app-with-wallet`
 
 Week 2 participants should check out `feature/week2-member-app`.
 

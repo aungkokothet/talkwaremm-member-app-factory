@@ -5,6 +5,7 @@ import 'package:profile_challenge_app/app/core/base/base_controller.dart';
 import 'package:profile_challenge_app/app/features/auth/model/app_identity.dart';
 import 'package:profile_challenge_app/app/features/auth/model/auth_failure.dart';
 import 'package:profile_challenge_app/app/features/auth/service/auth_service.dart';
+import 'package:profile_challenge_app/app/features/wallet/service/wallet_unlock_service.dart';
 
 class AuthController extends BaseController {
   AuthController({AuthService? authService})
@@ -80,6 +81,9 @@ class AuthController extends BaseController {
     }
 
     identity.value = null;
+    if (Get.isRegistered<WalletUnlockService>()) {
+      Get.find<WalletUnlockService>().lock();
+    }
     showMessage('');
   }
 

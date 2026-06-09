@@ -14,6 +14,8 @@ The app evolves week by week, but the Week 1 architecture remains the foundation
 | Google Classroom API | OAuth bearer token over HTTPS | Fixed Talkware course lookup |
 | SVG Rendering | flutter_svg ^2.0.17 | Renders SVG assets |
 | Icons | Material Icons | Built-in Flutter UI icons |
+| Stellar wallet signing | stellar_flutter_sdk ^2.2.2 | Builds and signs local Talkware Points payment transactions |
+| Local encryption | cryptography ^2.9.0 | Passcode-derived AES-GCM encryption for imported customer wallet secrets |
 
 ## Current System Boundaries
 
@@ -26,6 +28,7 @@ The app evolves week by week, but the Week 1 architecture remains the foundation
 - `lib/app/features/profile/` - evolved profile screen and lightweight profile controller
 - `lib/app/features/member/` - mock member status state for the evolved profile screen
 - `lib/app/features/classroom/` - fixed Talkware Classroom course API state and service
+- `lib/app/features/wallet/` - local Talkware Points activation, receive, QR-based send, local signing, and transaction history
 - `lib/app/widget/` - shared reusable widgets
 - `assets/images/` - static image and SVG assets
 - `test/` - widget tests
@@ -52,7 +55,7 @@ Routing is handled by GetX through `GetMaterialApp`.
 - Sign out clears `AuthController.identity` and routes back to `Routes.signIn`.
 - `InitialBinding` is registered at app startup for shared dependencies.
 - Feature bindings register feature controllers with GetX.
-- Active routes are `Routes.signIn` and `Routes.profileScreen`.
+- Active routes include `Routes.signIn`, `Routes.profileScreen`, wallet, receive, send scan, send form, send review, and wallet history routes.
 - There is no active member dashboard route.
 
 ## State Model
@@ -86,7 +89,7 @@ Those modules integrate through the sign-in and profile routes. The separate das
 
 ## Auth and Access Status
 
-Current runtime code uses direct Google Sign-In through `google_sign_in`, and Android sign-in is confirmed working. It requests Classroom read scopes and calls the Google Classroom API for one fixed Talkware course ID. It does not include Firebase Auth, backend calls, client secrets, a course browser, wallet behavior, or real points logic.
+Current runtime code uses direct Google Sign-In through `google_sign_in`, and Android sign-in is confirmed working. It requests Classroom read scopes and calls the Google Classroom API for one fixed Talkware course ID. Wallet runtime uses local config, customer access ZIP import, encrypted local customer secret storage, direct Horizon/NowNodes balance reads, local signing, direct payment submission, and local history for the configured Talkware Points asset. It does not include Firebase Auth, backend calls, client secrets, a course browser, backend wallet credential fetches, backend signing, arbitrary asset transfer, XLM transfer, or a full Horizon history explorer.
 
 The Android OAuth client ID is registered in Google Cloud with package name and SHA-1, and is not used as Dart `serverClientId`. Android uses the Web OAuth client ID as the default `serverClientId`, with `GOOGLE_SERVER_CLIENT_ID` still available as an override. Setup notes live in `docs/setup/google-sign-in.md`.
 

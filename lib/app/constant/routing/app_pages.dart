@@ -4,6 +4,13 @@ import 'package:profile_challenge_app/app/features/auth/binding/auth_binding.dar
 import 'package:profile_challenge_app/app/features/auth/screen/sign_in_screen.dart';
 import 'package:profile_challenge_app/app/features/profile/binding/profile_binding.dart';
 import 'package:profile_challenge_app/app/features/profile/screen/profile_screen.dart';
+import 'package:profile_challenge_app/app/features/wallet/binding/wallet_binding.dart';
+import 'package:profile_challenge_app/app/features/wallet/screen/receive_screen.dart';
+import 'package:profile_challenge_app/app/features/wallet/screen/send_review_screen.dart';
+import 'package:profile_challenge_app/app/features/wallet/screen/send_scan_screen.dart';
+import 'package:profile_challenge_app/app/features/wallet/screen/send_screen.dart';
+import 'package:profile_challenge_app/app/features/wallet/screen/transaction_history_screen.dart';
+import 'package:profile_challenge_app/app/features/wallet/screen/wallet_screen.dart';
 
 class AppPages {
   AppPages._();
@@ -20,6 +27,36 @@ class AppPages {
       name: Routes.profileScreen,
       page: () => const ProfileScreen(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: Routes.wallet,
+      page: () => const WalletScreen(),
+      binding: WalletBinding(),
+    ),
+    GetPage(
+      name: Routes.walletReceive,
+      page: () => const WalletReceiveScreen(),
+      binding: WalletBinding(),
+    ),
+    GetPage(
+      name: Routes.walletSend,
+      page: () => const WalletSendScreen(),
+      binding: WalletBinding(),
+    ),
+    GetPage(
+      name: Routes.walletSendScan,
+      page: () => const WalletSendScanScreen(),
+      binding: WalletBinding(),
+    ),
+    GetPage(
+      name: Routes.walletSendReview,
+      page: () => const WalletSendReviewScreen(),
+      binding: WalletBinding(),
+    ),
+    GetPage(
+      name: Routes.walletHistory,
+      page: () => const WalletTransactionHistoryScreen(),
+      binding: WalletBinding(),
     ),
   ];
 }

@@ -12,7 +12,7 @@ The app does not list all Classroom courses. It loads one Talkware course only.
 - No Firebase Auth is used.
 - No backend is used.
 - Member status remains mock-first.
-- Talkware Points remains a placeholder.
+- Talkware Points wallet runtime is separate from Classroom and is documented in `docs/setup/wallet-mobile-run.md`.
 
 ## Fixed Talkware Course
 

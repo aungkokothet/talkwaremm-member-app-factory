@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:profile_challenge_app/app/constant/resources/app_string.dart';
-import 'package:profile_challenge_app/app/constant/resources/app_theme.dart';
 import 'package:profile_challenge_app/app/constant/routing/app_pages.dart';
 import 'package:profile_challenge_app/app/core/binding/initial_binding.dart';
+import 'package:profile_challenge_app/app/design/talkware_theme.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
           child: child,
         );
       },
-      theme: AppTheme.lightTheme,
+      theme: TalkwareTheme.light,
+      darkTheme: TalkwareTheme.dark,
+      themeMode: ThemeMode.system,
       initialRoute: AppPages.initial,
       initialBinding: InitialBinding(),
       getPages: AppPages.routes,

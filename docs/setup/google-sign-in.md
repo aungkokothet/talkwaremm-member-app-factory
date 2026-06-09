@@ -15,9 +15,9 @@ Classroom API setup is documented separately in `docs/setup/google-classroom-api
 - iOS Google Sign-In is not configured.
 - Google Classroom API is now used for one fixed Talkware course.
 - Talkware member status remains mock-first.
-- Talkware Points remains a placeholder.
+- Talkware Points wallet runtime exists separately from Google Sign-In and is documented in `docs/setup/wallet-mobile-run.md`.
 - Classroom read scopes are requested through Google Sign-In authorization.
-- No Firebase Auth, backend, wallet, or points runtime has been added.
+- No Firebase Auth, backend auth, client secret, backend wallet credential fetch, backend signing, or persistent Google auth runtime has been added.
 
 ## Android OAuth Client
 

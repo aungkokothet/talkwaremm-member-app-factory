@@ -42,16 +42,9 @@ void main() {
     expect(find.text(AppString.profileTitle), findsNothing);
     expect(find.text(FakeAuthService.identity.fullName), findsOneWidget);
     expect(find.text(FakeAuthService.identity.email), findsOneWidget);
-    expect(find.text(AppString.memberStatusTitle), findsOneWidget);
     expect(find.text(AppString.classroomTitle), findsOneWidget);
-
-    await tester.scrollUntilVisible(
-      find.text(AppString.pointsTitle),
-      120,
-      scrollable: find.byType(Scrollable),
-    );
-
-    expect(find.text(AppString.pointsTitle), findsOneWidget);
+    expect(find.text(AppString.memberStatusTitle), findsNothing);
+    expect(find.text(AppString.pointsTitle), findsNothing);
   });
 
   testWidgets('signs out from the hamburger menu', (tester) async {
@@ -60,7 +53,7 @@ void main() {
     await tester.tap(find.text(AppString.signInWithGoogle));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.byIcon(Icons.menu));
+    await tester.tap(find.byIcon(Icons.menu_outlined));
     await tester.pumpAndSettle();
 
     expect(find.text(AppString.profileMenuTitle), findsOneWidget);

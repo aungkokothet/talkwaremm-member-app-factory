@@ -43,3 +43,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Local loyalty runtime config must not be committed.
+assets/config/loyalty-system-config.local.json

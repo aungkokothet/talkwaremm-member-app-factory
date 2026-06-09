@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:profile_challenge_app/app/constant/resources/app_colors.dart';
+import 'package:profile_challenge_app/app/design/talkware_radius.dart';
+import 'package:profile_challenge_app/app/design/talkware_spacing.dart';
 
 class ProfileInfoTile extends StatelessWidget {
   const ProfileInfoTile({
@@ -15,24 +16,26 @@ class ProfileInfoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Row(
       children: [
         Container(
           width: 42,
           height: 42,
           decoration: BoxDecoration(
-            color: AppColors.primary.withValues(alpha: 0.12),
-            borderRadius: BorderRadius.circular(8),
+            color: colorScheme.primaryContainer,
+            borderRadius: BorderRadius.circular(TalkwareRadius.sm),
           ),
-          child: Icon(icon, color: AppColors.primary),
+          child: Icon(icon, color: colorScheme.onPrimaryContainer),
         ),
-        const SizedBox(width: 12),
+        const SizedBox(width: TalkwareSpacing.sm),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(title, style: Theme.of(context).textTheme.bodyMedium),
-              const SizedBox(height: 2),
+              const SizedBox(height: TalkwareSpacing.xxs),
               Text(value, style: Theme.of(context).textTheme.bodyLarge),
             ],
           ),
