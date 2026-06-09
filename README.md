@@ -12,7 +12,7 @@ The goal is to learn how real software grows:
 - document decisions as the system changes
 - use AI assistance with clear context and workflow rules
 
-Week 1 established the stable Builder Profile App baseline. Week 2 is the current evolution toward a Talkware Member App and lives on `feature/week2-member-app`.
+Week 1 established the stable Builder Profile App baseline. Week 2 adds real Android Google Sign-In and one fixed Talkware Classroom integration. Week 3 adds an on-device Talkware Points wallet that imports a customer access ZIP, encrypts the customer secret with a passcode, signs transactions on the device, and submits them directly to Horizon/NowNodes.
 
 ## Week-by-Week Evolution
 
@@ -28,9 +28,17 @@ Week 1 is the frozen starter milestone. It includes:
 
 Students should use Week 1 to understand and customize a working app safely.
 
-### Week 2: Current Evolution
+### Week 2: Member App Identity And Classroom
 
-Week 2 evolves the same codebase toward an operational Talkware Member App. The Week 2 learning track is `feature/week2-member-app`, where Android Google Sign-In is the first real integration. Google Classroom remains mock/planned, member status remains mock, and Talkware Points remains placeholder.
+Week 2 evolves the same codebase toward an operational Talkware Member App. It includes Android Google Sign-In through the official `google_sign_in` package and fixed Talkware Classroom course data through Google Classroom API calls.
+
+Week 2 does not show all Classroom courses, implement a course browser, add backend authentication, or persist Google auth state.
+
+### Week 3: Member App With Wallet
+
+Week 3 adds the Talkware Points wallet track. It includes local config, customer access ZIP import, on-device encrypted customer secret storage, direct Horizon/NowNodes balance reads, receive QR, QR-based send, local transaction signing, direct transaction submission, and local transaction history.
+
+Week 3 does not fetch wallet credentials from a backend, use backend signing, transfer arbitrary assets, transfer XLM, or implement a full Horizon history explorer.
 
 Do not rewrite the Week 1 app. Extend it.
 
@@ -38,10 +46,11 @@ Do not rewrite the Week 1 app. Extend it.
 
 - `main` = stable course starter / Week 1 baseline for new students
 - `feature/week2-member-app` = Week 2 Talkware Member App evolution
-- future weekly branches = persistent course learning tracks
-- tags = frozen learning milestones
+- `feature/week3-member-app-with-wallet` = Week 3 Member App with Wallet evolution
+- weekly feature branches = persistent course learning tracks
+- tags = incremental learning checkpoints
 
-Use tags when teaching or revisiting a completed week. Weekly feature branches are not throwaway branches; they hold each week of app evolution. `main` should not automatically absorb weekly work unless the course owner explicitly changes the branch strategy.
+Weekly feature branches are not throwaway branches; they hold each week of app evolution. Incremental updates can be found in Git tags. `main` should not automatically absorb weekly work unless the course owner explicitly changes the branch strategy.
 
 ## Common Commands
 
@@ -49,12 +58,6 @@ Clone:
 
 ```bash
 git clone https://github.com/aungkokothet/talkwaremm-member-app-factory.git
-```
-
-Start Week 1:
-
-```bash
-git checkout v0.1-week1-first-challenge
 ```
 
 Return to starter baseline:
@@ -70,10 +73,10 @@ Start Week 2:
 git checkout feature/week2-member-app
 ```
 
-Future Week 3 track:
+Start Week 3:
 
 ```bash
-git checkout feature/week3-loyalty-structure
+git checkout feature/week3-member-app-with-wallet
 ```
 
 ## Architecture Baseline
